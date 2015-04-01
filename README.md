@@ -100,10 +100,10 @@ You also can easily pause and start action to control timer:
 ```
 
 
-Thanks to github, I learn a lot from friends in github.
+Thanks to github, I learn a lot from friends in github.</br>
 If there is any bug, contact me huangyibiao520@163.com.
 
 ##NOTE
-If your app adopts my lib, hope you can send me an email,just make me know who uses it.
+If your app adopts my lib, hope you can send me an email,just make me know who uses it.</br>
 Thanks in advance!!!
 
