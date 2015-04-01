@@ -16,6 +16,13 @@ Any quetion? send me an email. Thank you in advance!
 
 ![image](https://github.com/632840804/HYBLoopScrollView/blob/master/screen.png)
 
+##HOW TO INSTALL
+Use cocopods:
+```
+platform :ios, "6.0"
+pod "HYBLoopScrollView"
+```
+or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
 ##Features
 For the property imageUrls, you can contain url strings, image names from main bundle and 
@@ -108,10 +115,13 @@ You also can easily pause and start action to control timer:
 ```
 
 ##Thanks
-Thanks to github, I learn a lot from friends in github.</br>
+Thanks to github, I learn a lot from friends in github.<br/>
+Thanks to AFNetworking author.<br/>
 If there is any bug, contact me huangyibiao520@163.com.
+
+
 ##Knowledge
-If your app adopts my lib, hope you can send me an email,just make me know who uses it.</br>
+If your app adopts my lib, hope you can send me an email,just make me know who uses it.<br/>
 
 Thanks in advance!!!
 
