@@ -1,24 +1,18 @@
 Pod::Spec.new do |s|
   s.name         = "HYBLoopScrollView"
-  s.version      = "0.0.1"
+  s.version      = “1.0”
   s.summary      = “A scroll view can cycle scroll.”
 
   s.description  = <<-DESC
-                   A longer description of HYBLoopScrollView in Markdown format.
+It’s a very common use control for app showing the ad images. 
+                  DESC
 
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
-                   DESC
-
-  s.homepage     = "http://EXAMPLE/HYBLoopScrollView"
+  s.homepage     = "https://github.com/632840804/HYBLoopScrollView"
   s.license      = "MIT"
   s.author             = { "HuangYiBiao" => “huangyibiao520@163.com" }
   s.platform     = :ios
-  s.source       = { :git => "http://EXAMPLE/HYBLoopScrollView.git", :tag => "0.0.1" }
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source       = { :git => "https://github.com/632840804/HYBLoopScrollView.git", :tag => “1.0” }
+  s.source_files  = “HYBLoopScrollView/HYBLoopScrollView/”
   s.requires_arc = true
   s.dependency “AFNetworking”, "~> 2.0”
 
