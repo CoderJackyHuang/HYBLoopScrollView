@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		693CEB9C1ACBC749005FD2DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEB9B1ACBC749005FD2DC /* main.m */; };
+		693CEB9F1ACBC749005FD2DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEB9E1ACBC749005FD2DC /* AppDelegate.m */; };
+		693CEBA21ACBC749005FD2DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBA11ACBC749005FD2DC /* ViewController.m */; };
+		693CEBA71ACBC749005FD2DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693CEBA61ACBC749005FD2DC /* Images.xcassets */; };
+		693CEBB61ACBC749005FD2DC /* HYBLoopScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBB51ACBC749005FD2DC /* HYBLoopScrollViewTests.m */; };
+		693CEBC51ACBC7E7005FD2DC /* HYBLoopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBC41ACBC7E7005FD2DC /* HYBLoopScrollView.m */; };
+		69A2634E1ACBCDC20059044B /* HYBLoadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A2634D1ACBCDC20059044B /* HYBLoadImageView.m */; };
+		69A263511ACBD25C0059044B /* HYBPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A263501ACBD25C0059044B /* HYBPageControl.m */; };
+		69A263561ACBDE690059044B /* h1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69A263521ACBDE690059044B /* h1.jpg */; };
+		69A263571ACBDE690059044B /* h3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69A263531ACBDE690059044B /* h3.jpg */; };
+		69A263581ACBDE690059044B /* h2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69A263541ACBDE690059044B /* h2.jpg */; };
+		69A263591ACBDE690059044B /* h4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69A263551ACBDE690059044B /* h4.jpg */; };
+		D4966024FA23BF6BA4AF21F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC2AA8552D2A5361D1A5686 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		693CEBB01ACBC749005FD2DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693CEB8E1ACBC749005FD2DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 693CEB951ACBC749005FD2DC;
+			remoteInfo = HYBLoopScrollView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		693CEB961ACBC749005FD2DC /* HYBLoopScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HYBLoopScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		693CEB9A1ACBC749005FD2DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		693CEB9B1ACBC749005FD2DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		693CEB9D1ACBC749005FD2DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		693CEB9E1ACBC749005FD2DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		693CEBA01ACBC749005FD2DC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		693CEBA11ACBC749005FD2DC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		693CEBA61ACBC749005FD2DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		693CEBAF1ACBC749005FD2DC /* HYBLoopScrollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HYBLoopScrollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		693CEBB41ACBC749005FD2DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		693CEBB51ACBC749005FD2DC /* HYBLoopScrollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HYBLoopScrollViewTests.m; sourceTree = "<group>"; };
+		693CEBC31ACBC7E7005FD2DC /* HYBLoopScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYBLoopScrollView.h; path = HYBLoopScrollView/HYBLoopScrollView.h; sourceTree = "<group>"; };
+		693CEBC41ACBC7E7005FD2DC /* HYBLoopScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYBLoopScrollView.m; path = HYBLoopScrollView/HYBLoopScrollView.m; sourceTree = "<group>"; };
+		69A2634C1ACBCDC20059044B /* HYBLoadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYBLoadImageView.h; path = HYBLoopScrollView/HYBLoadImageView.h; sourceTree = "<group>"; };
+		69A2634D1ACBCDC20059044B /* HYBLoadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYBLoadImageView.m; path = HYBLoopScrollView/HYBLoadImageView.m; sourceTree = "<group>"; };
+		69A2634F1ACBD25C0059044B /* HYBPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYBPageControl.h; path = HYBLoopScrollView/HYBPageControl.h; sourceTree = "<group>"; };
+		69A263501ACBD25C0059044B /* HYBPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYBPageControl.m; path = HYBLoopScrollView/HYBPageControl.m; sourceTree = "<group>"; };
+		69A263521ACBDE690059044B /* h1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h1.jpg; sourceTree = "<group>"; };
+		69A263531ACBDE690059044B /* h3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h3.jpg; sourceTree = "<group>"; };
+		69A263541ACBDE690059044B /* h2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h2.jpg; sourceTree = "<group>"; };
+		69A263551ACBDE690059044B /* h4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h4.jpg; sourceTree = "<group>"; };
+		D61DE45CF941C2F40CAE4B44 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		DFC2AA8552D2A5361D1A5686 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF543CC920A3CE8083A69FA8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		693CEB931ACBC749005FD2DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4966024FA23BF6BA4AF21F5 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		693CEBAC1ACBC749005FD2DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29C69E21CA17EF87AD30A037 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D61DE45CF941C2F40CAE4B44 /* Pods.debug.xcconfig */,
+				EF543CC920A3CE8083A69FA8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		693CEB8D1ACBC749005FD2DC = {
+			isa = PBXGroup;
+			children = (
+				693CEB981ACBC749005FD2DC /* HYBLoopScrollView */,
+				693CEBB21ACBC749005FD2DC /* HYBLoopScrollViewTests */,
+				693CEB971ACBC749005FD2DC /* Products */,
+				29C69E21CA17EF87AD30A037 /* Pods */,
+				CF7EF72A4F8002ED95B1454B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		693CEB971ACBC749005FD2DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				693CEB961ACBC749005FD2DC /* HYBLoopScrollView.app */,
+				693CEBAF1ACBC749005FD2DC /* HYBLoopScrollViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		693CEB981ACBC749005FD2DC /* HYBLoopScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				693CEBBF1ACBC78D005FD2DC /* HYBLoopScrollView */,
+				693CEB9D1ACBC749005FD2DC /* AppDelegate.h */,
+				693CEB9E1ACBC749005FD2DC /* AppDelegate.m */,
+				693CEBA01ACBC749005FD2DC /* ViewController.h */,
+				693CEBA11ACBC749005FD2DC /* ViewController.m */,
+				693CEBA61ACBC749005FD2DC /* Images.xcassets */,
+				693CEB991ACBC749005FD2DC /* Supporting Files */,
+			);
+			path = HYBLoopScrollView;
+			sourceTree = "<group>";
+		};
+		693CEB991ACBC749005FD2DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				69A263521ACBDE690059044B /* h1.jpg */,
+				69A263531ACBDE690059044B /* h3.jpg */,
+				69A263541ACBDE690059044B /* h2.jpg */,
+				69A263551ACBDE690059044B /* h4.jpg */,
+				693CEB9A1ACBC749005FD2DC /* Info.plist */,
+				693CEB9B1ACBC749005FD2DC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		693CEBB21ACBC749005FD2DC /* HYBLoopScrollViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				693CEBB51ACBC749005FD2DC /* HYBLoopScrollViewTests.m */,
+				693CEBB31ACBC749005FD2DC /* Supporting Files */,
+			);
+			path = HYBLoopScrollViewTests;
+			sourceTree = "<group>";
+		};
+		693CEBB31ACBC749005FD2DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				693CEBB41ACBC749005FD2DC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		693CEBBF1ACBC78D005FD2DC /* HYBLoopScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				69A2634C1ACBCDC20059044B /* HYBLoadImageView.h */,
+				69A2634D1ACBCDC20059044B /* HYBLoadImageView.m */,
+				693CEBC31ACBC7E7005FD2DC /* HYBLoopScrollView.h */,
+				693CEBC41ACBC7E7005FD2DC /* HYBLoopScrollView.m */,
+				69A2634F1ACBD25C0059044B /* HYBPageControl.h */,
+				69A263501ACBD25C0059044B /* HYBPageControl.m */,
+			);
+			name = HYBLoopScrollView;
+			sourceTree = "<group>";
+		};
+		CF7EF72A4F8002ED95B1454B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFC2AA8552D2A5361D1A5686 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		693CEB951ACBC749005FD2DC /* HYBLoopScrollView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 693CEBB91ACBC749005FD2DC /* Build configuration list for PBXNativeTarget "HYBLoopScrollView" */;
+			buildPhases = (
+				403BE5265EC2F3723CB0DC4F /* Check Pods Manifest.lock */,
+				693CEB921ACBC749005FD2DC /* Sources */,
+				693CEB931ACBC749005FD2DC /* Frameworks */,
+				693CEB941ACBC749005FD2DC /* Resources */,
+				B52330EBE00A5A2595EEDED6 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HYBLoopScrollView;
+			productName = HYBLoopScrollView;
+			productReference = 693CEB961ACBC749005FD2DC /* HYBLoopScrollView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		693CEBAE1ACBC749005FD2DC /* HYBLoopScrollViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 693CEBBC1ACBC749005FD2DC /* Build configuration list for PBXNativeTarget "HYBLoopScrollViewTests" */;
+			buildPhases = (
+				693CEBAB1ACBC749005FD2DC /* Sources */,
+				693CEBAC1ACBC749005FD2DC /* Frameworks */,
+				693CEBAD1ACBC749005FD2DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				693CEBB11ACBC749005FD2DC /* PBXTargetDependency */,
+			);
+			name = HYBLoopScrollViewTests;
+			productName = HYBLoopScrollViewTests;
+			productReference = 693CEBAF1ACBC749005FD2DC /* HYBLoopScrollViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		693CEB8E1ACBC749005FD2DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = huangyibiao;
+				TargetAttributes = {
+					693CEB951ACBC749005FD2DC = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					693CEBAE1ACBC749005FD2DC = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 693CEB951ACBC749005FD2DC;
+					};
+				};
+			};
+			buildConfigurationList = 693CEB911ACBC749005FD2DC /* Build configuration list for PBXProject "HYBLoopScrollView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 693CEB8D1ACBC749005FD2DC;
+			productRefGroup = 693CEB971ACBC749005FD2DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				693CEB951ACBC749005FD2DC /* HYBLoopScrollView */,
+				693CEBAE1ACBC749005FD2DC /* HYBLoopScrollViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		693CEB941ACBC749005FD2DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69A263591ACBDE690059044B /* h4.jpg in Resources */,
+				69A263561ACBDE690059044B /* h1.jpg in Resources */,
+				693CEBA71ACBC749005FD2DC /* Images.xcassets in Resources */,
+				69A263571ACBDE690059044B /* h3.jpg in Resources */,
+				69A263581ACBDE690059044B /* h2.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		693CEBAD1ACBC749005FD2DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		403BE5265EC2F3723CB0DC4F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B52330EBE00A5A2595EEDED6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		693CEB921ACBC749005FD2DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69A263511ACBD25C0059044B /* HYBPageControl.m in Sources */,
+				693CEBA21ACBC749005FD2DC /* ViewController.m in Sources */,
+				693CEB9F1ACBC749005FD2DC /* AppDelegate.m in Sources */,
+				693CEBC51ACBC7E7005FD2DC /* HYBLoopScrollView.m in Sources */,
+				693CEB9C1ACBC749005FD2DC /* main.m in Sources */,
+				69A2634E1ACBCDC20059044B /* HYBLoadImageView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		693CEBAB1ACBC749005FD2DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				693CEBB61ACBC749005FD2DC /* HYBLoopScrollViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		693CEBB11ACBC749005FD2DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 693CEB951ACBC749005FD2DC /* HYBLoopScrollView */;
+			targetProxy = 693CEBB01ACBC749005FD2DC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		693CEBB71ACBC749005FD2DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		693CEBB81ACBC749005FD2DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		693CEBBA1ACBC749005FD2DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D61DE45CF941C2F40CAE4B44 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = HYBLoopScrollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		693CEBBB1ACBC749005FD2DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF543CC920A3CE8083A69FA8 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = HYBLoopScrollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		693CEBBD1ACBC749005FD2DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HYBLoopScrollViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HYBLoopScrollView.app/HYBLoopScrollView";
+			};
+			name = Debug;
+		};
+		693CEBBE1ACBC749005FD2DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HYBLoopScrollViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HYBLoopScrollView.app/HYBLoopScrollView";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		693CEB911ACBC749005FD2DC /* Build configuration list for PBXProject "HYBLoopScrollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				693CEBB71ACBC749005FD2DC /* Debug */,
+				693CEBB81ACBC749005FD2DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		693CEBB91ACBC749005FD2DC /* Build configuration list for PBXNativeTarget "HYBLoopScrollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				693CEBBA1ACBC749005FD2DC /* Debug */,
+				693CEBBB1ACBC749005FD2DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		693CEBBC1ACBC749005FD2DC /* Build configuration list for PBXNativeTarget "HYBLoopScrollViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				693CEBBD1ACBC749005FD2DC /* Debug */,
+				693CEBBE1ACBC749005FD2DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 693CEB8E1ACBC749005FD2DC /* Project object */;
+}
