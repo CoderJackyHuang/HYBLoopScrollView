@@ -16,6 +16,13 @@ Any quetion? send me an email. Thank you in advance!
 
 ![image](https://github.com/632840804/HYBLoopScrollView/blob/master/screen.png)
 
+
+##Features
+For the property imageUrls, you can contain url strings, image names from main bundle and 
+UIImage objects.</br>
+When load image finish, it will show animated with fade in and out defaut.
+
+##NOTE
 In fact, I don't know how to add a dynamic image which can show the features of my code.
 So if you really want to see the effect, fork, clone to desktop and run with Xcode or download
 the zip file and run with Xcode.
@@ -24,6 +31,7 @@ It is easy to use, you can use it like below.It support three kind of objects in
 imageUrls can be mix with an UIImage object, a image name from main bundle, and an absolute url
 string to download from network.
 
+##HOW TO USE
 ```Objective-C
   NSString *url = @"http://test.meirongzongjian.com/imageServer/user/3/42ccb9c75ccf5e910cd6f5aaf0cd1200.jpg";
   NSArray *images = @[@"h1.jpg",
@@ -99,11 +107,11 @@ You also can easily pause and start action to control timer:
 - (void)startTimer;
 ```
 
-
+##Thanks
 Thanks to github, I learn a lot from friends in github.</br>
 If there is any bug, contact me huangyibiao520@163.com.
-
-##NOTE
+##Knowledge
 If your app adopts my lib, hope you can send me an email,just make me know who uses it.</br>
+
 Thanks in advance!!!
 
