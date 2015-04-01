@@ -41,7 +41,6 @@
     NSLog(@"scroll to index: %ld", atIndex);
   };
   loop.alignment = kPageControlAlignRight;
-  [loop setImageUrls:images];
   loop.adTitles = titles;
 
   [self.view addSubview:loop];

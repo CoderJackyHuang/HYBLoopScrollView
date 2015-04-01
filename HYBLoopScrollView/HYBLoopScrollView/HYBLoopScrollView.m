@@ -62,6 +62,18 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 @implementation HYBLoopScrollView
 
+- (void)pauseTimer {
+  if (self.timer) {
+    [self.timer setFireDate:[NSDate distantFuture]];
+  }
+}
+
+- (void)startTimer {
+  if (self.timer) {
+    [self.timer setFireDate:[NSDate distantPast]];
+  }
+}
+
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {
   HYBLoopScrollView *loopView = [[HYBLoopScrollView alloc] initWithFrame:frame];
   loopView.imageUrls = imageUrls;

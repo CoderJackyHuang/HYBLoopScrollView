@@ -112,6 +112,17 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex);
  */
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls;
 
+/**
+ *  Pause the timer. Usually you need to pause the timer when the view disappear.
+ */
+- (void)pauseTimer;
+
+/**
+ *  Start the timer immediately. If you has pause the timer, you may need to start 
+ *  the timer again when the view appear.
+ */
+- (void)startTimer;
+
 @end
 
 @interface UIView (Ext)
