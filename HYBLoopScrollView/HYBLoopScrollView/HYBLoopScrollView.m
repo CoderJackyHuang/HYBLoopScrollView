@@ -242,7 +242,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     NSString *urlString = self.imageUrls[itemIndex];
     if ([urlString isKindOfClass:[UIImage class]]) {
       cell.imageView.image = (UIImage *)urlString;
-    } else if ([urlString hasPrefix:@"http://"] || [urlString hasPrefix:@"https://"]) {
+    } else if ([urlString hasPrefix:@"http://"]
+               || [urlString hasPrefix:@"https://"]
+               || [urlString containsString:@"/"]) {
       [cell.imageView setImageWithURLString:urlString placeholder:self.placeholder];
     } else {
       cell.imageView.image = [UIImage imageNamed:urlString];
