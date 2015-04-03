@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name         = "HYBLoopScrollView"
-  s.version      = "1.1"
+  s.version      = "1.2"
   s.summary      = "A strong and convenience control for ad loop scroll"
 
   s.description  = <<-DESC
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
  s.license      = "MIT"
   s.author             = { "Jacky Huang" => "18675574495@163.com" }
  s.platform     = :ios, '6.0'
-  s.source       = { :git => "https://github.com/632840804/HYBLoopScrollView.git", :tag => "1.1" }
+  s.source       = { :git => "https://github.com/632840804/HYBLoopScrollView.git", :tag => "1.2" }
  s.source_files  = "HYBLoopScrollView/HYBLoopScrollview/*"
 
   # s.public_header_files = "Classes/**/*.h"
