@@ -20,7 +20,7 @@ Any quetion? send me an email. Thank you in advance!
 Use cocopods:
 ```
 platform :ios, "6.0"
-pod "HYBLoopScrollView", '~> 1.1'
+pod "HYBLoopScrollView", '~> 1.2'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
