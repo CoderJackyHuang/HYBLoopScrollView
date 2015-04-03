@@ -95,6 +95,15 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex);
 @property (nonatomic, strong) NSArray *imageUrls;
 
 /**
+ *  Get/Set whether page control can handle value changed event.
+ * 
+ *  @note Set to YES, page control will change to relevant page when clicked.
+ *        Set to NO, page control is not enabled.
+ *        Default is YES.
+ */
+@property (nonatomic, assign) BOOL pageControlEnabled;
+
+/**
  *  The ad titles. Only for the alignment kPageControlAlignRight type.
  *
  *  @note If alignment == kPageControlAlignRight, it should be not nil. 

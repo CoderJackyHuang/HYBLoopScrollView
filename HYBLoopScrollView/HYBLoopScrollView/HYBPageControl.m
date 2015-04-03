@@ -14,9 +14,18 @@
   if (self = [super init]) {
     // To Do:
     // set any default properties here
+    [self addTarget:self
+             action:@selector(onPageControlValueChanged:)
+   forControlEvents:UIControlEventValueChanged];
   }
   
   return self;
+}
+
+- (void)onPageControlValueChanged:(HYBPageControl *)sender {
+  if (self.valueChangedBlock) {
+    self.valueChangedBlock(sender.currentPage);
+  }
 }
 
 @end

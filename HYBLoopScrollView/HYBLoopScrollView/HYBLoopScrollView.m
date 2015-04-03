@@ -57,6 +57,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) HYBPageControl *pageControl;
 @property (nonatomic, assign) NSInteger totalPageCount;
+// Record the previous page index, for we need to update to another page when
+// it is clicked at some point.
+@property (nonatomic, assign) NSInteger previousPageIndex;
 
 @end
 
@@ -131,11 +134,33 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 
+- (void)setPageControlEnabled:(BOOL)pageControlEnabled {
+  if (_pageControlEnabled != pageControlEnabled) {
+    _pageControlEnabled = pageControlEnabled;
+    
+    if (_pageControlEnabled) {
+      __weak typeof(self) weakSelf = self;
+      self.pageControl.valueChangedBlock = ^(NSInteger clickedAtIndex) {
+              NSInteger curIndex = (weakSelf.collectionView.contentOffset.x
+                                    + weakSelf.layout.itemSize.width * 0.5) / weakSelf.layout.itemSize.width;
+        NSInteger toIndex = curIndex + (clickedAtIndex > weakSelf.previousPageIndex ? clickedAtIndex : -clickedAtIndex);
+        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionNone
+                                            animated:YES];
+
+      };
+    } else {
+      self.pageControl.valueChangedBlock = nil;
+    }
+  }
+}
+
 - (void)configPageControl {
   if (self.pageControl == nil) {
     self.pageControl = [[HYBPageControl alloc] init];
     self.pageControl.hidesForSinglePage = YES;
     [self addSubview:self.pageControl];
+    self.pageControlEnabled = YES;
   }
   
   [self bringSubviewToFront:self.pageControl];
@@ -146,7 +171,6 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   if (self.alignment == kPageControlAlignCenter) {
     self.pageControl.originX = (self.width - self.pageControl.width) / 2.0;
   } else if (self.alignment == kPageControlAlignRight) {
-    NSLog(@"%f %f", self.width, self.pageControl.width);
     self.pageControl.rightX = self.width - 10;
   }
   self.pageControl.originY = self.height - self.pageControl.height + 5;
@@ -269,6 +293,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   int itemIndex = (scrollView.contentOffset.x + self.collectionView.width * 0.5) / self.collectionView.width;
   itemIndex = itemIndex % self.imageUrls.count;
   _pageControl.currentPage = itemIndex;
+  
+  // record
+  self.previousPageIndex = itemIndex;
   
   if (self.didScrollBlock) {
     self.didScrollBlock(itemIndex);

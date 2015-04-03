@@ -32,13 +32,13 @@
                       ];
   
   HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images];
-  loop.timeInterval = 1;
+  loop.timeInterval = 10;
   loop.placeholder = [UIImage imageNamed:@"h1.jpg"];
   loop.didSelectItemBlock = ^(NSInteger atIndex) {
-    NSLog(@"clicked item at index: %ld", atIndex);
+  //  NSLog(@"clicked item at index: %ld", atIndex);
   };
   loop.didScrollBlock = ^(NSInteger atIndex) {
-    NSLog(@"scroll to index: %ld", atIndex);
+  //  NSLog(@"scroll to index: %ld", atIndex);
   };
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;
@@ -47,12 +47,12 @@
   
   
   HYBLoopScrollView *loop1 = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, loop.bottomY + 100, 320, 120) imageUrls:images];
-  loop1.timeInterval = 1;
+  loop1.timeInterval = 10;
   loop1.didSelectItemBlock = ^(NSInteger atIndex) {
-    NSLog(@"clicked item at index: %ld", atIndex);
+   // NSLog(@"clicked item at index: %ld", atIndex);
   };
   loop1.didScrollBlock = ^(NSInteger atIndex) {
-    NSLog(@"scroll to index: %ld", atIndex);
+  //  NSLog(@"scroll to index: %ld", atIndex);
   };
   [self.view addSubview:loop1];
 
