@@ -17,6 +17,7 @@
 @interface HYBLoadImageView () {
 @private
   BOOL                 _isAnimated;
+  UITapGestureRecognizer *_tap;
 }
 
 
@@ -87,6 +88,31 @@
     self.layer.cornerRadius = 0.0;
   }
   return;
+}
+
+- (void)setTapImageViewBlock:(HYBTapImageViewBlock)tapImageViewBlock {
+  if (_tapImageViewBlock != tapImageViewBlock) {
+    _tapImageViewBlock = [tapImageViewBlock copy];
+  }
+  
+  if (_tapImageViewBlock == nil) {
+    if (_tap != nil) {
+      [self removeGestureRecognizer:_tap];
+      self.userInteractionEnabled = NO;
+    }
+  } else {
+    if (_tap == nil) {
+      _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+      [self addGestureRecognizer:_tap];
+      self.userInteractionEnabled = YES;
+    }
+  }
+}
+
+- (void)onTap:(UITapGestureRecognizer *)tap {
+  if (self.tapImageViewBlock) {
+    self.tapImageViewBlock((HYBLoadImageView *)tap.view);
+  }
 }
 
 - (BOOL)isCircle {

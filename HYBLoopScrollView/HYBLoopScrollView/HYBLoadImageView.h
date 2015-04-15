@@ -68,6 +68,17 @@ typedef void (^HYBImageBlock)(UIImage *image);
 @property (nonatomic, copy) HYBImageBlock completion;
 
 /**
+ *  Get/Set the call back block when the image view is tapped.
+ *  
+ *  @note Only when property tapImageViewBlock is setted, will it add a tap gesture.
+ *        When set it to be nil, the tap gesture will be removed automatically.
+ *
+ *  @param imageView The event receiver.
+ */
+typedef void (^HYBTapImageViewBlock)(HYBLoadImageView *imageView);
+@property (nonatomic, copy) HYBTapImageViewBlock tapImageViewBlock;
+
+/**
  *  Use these methods to download image async.
  */
 - (void)setImageWithURLString:(NSString *)url placeholderImage:(NSString *)placeholderImage;
