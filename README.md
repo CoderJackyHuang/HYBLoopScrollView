@@ -16,6 +16,9 @@ Any quetion? send me an email. Thank you in advance!
 
 ![image](https://github.com/632840804/HYBLoopScrollView/blob/master/screen.png)
 
+##UPDATE
+Add tap gesture to image view.
+
 ##HOW TO INSTALL
 Use cocopods:
 ```
