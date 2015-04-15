@@ -23,7 +23,7 @@ Add tap gesture to image view.
 Use cocopods:
 ```
 platform :ios, "6.0"
-pod "HYBLoopScrollView", '~> 1.2'
+pod "HYBLoopScrollView", '~> 1.3'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
