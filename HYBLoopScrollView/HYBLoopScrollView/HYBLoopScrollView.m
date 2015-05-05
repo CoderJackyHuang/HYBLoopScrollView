@@ -7,7 +7,6 @@
 //
 
 #import "HYBLoopScrollView.h"
-#import "HYBPageControl.h"
 
 NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
@@ -49,12 +48,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 @end
 
-@interface HYBLoopScrollView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface HYBLoopScrollView () <UICollectionViewDataSource, UICollectionViewDelegate> {
+  HYBPageControl *_pageControl;
+}
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) HYBPageControl *pageControl;
 @property (nonatomic, assign) NSInteger totalPageCount;
 // Record the previous page index, for we need to update to another page when
 // it is clicked at some point.
@@ -74,6 +74,10 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   if (self.timer) {
     [self.timer setFireDate:[NSDate distantPast]];
   }
+}
+
+- (HYBPageControl *)pageControl {
+  return _pageControl;
 }
 
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {
@@ -156,7 +160,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)configPageControl {
   if (self.pageControl == nil) {
-    self.pageControl = [[HYBPageControl alloc] init];
+    _pageControl = [[HYBPageControl alloc] init];
     self.pageControl.hidesForSinglePage = YES;
     [self addSubview:self.pageControl];
     self.pageControlEnabled = YES;

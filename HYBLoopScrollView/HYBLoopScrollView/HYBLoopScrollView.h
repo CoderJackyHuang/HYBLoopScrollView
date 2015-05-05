@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HYBPageControl.h"
 #import "HYBLoadImageView.h"
 
 /**
@@ -64,6 +65,11 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
  *  The holder image for the image view. Default is nil
  */
 @property (nonatomic, strong) UIImage *placeholder;
+
+/**
+ *  Get the page control
+ */
+@property (nonatomic, strong, readonly) HYBPageControl *pageControl;
 
 /**
  *  The alignment type of the page control.
