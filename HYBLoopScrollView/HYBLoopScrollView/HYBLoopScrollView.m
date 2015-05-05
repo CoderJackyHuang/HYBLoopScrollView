@@ -7,7 +7,6 @@
 //
 
 #import "HYBLoopScrollView.h"
-#import "HYBLoadImageView.h"
 #import "HYBPageControl.h"
 
 NSString * const kCellIdentifier = @"ReuseCellIdentifier";
@@ -284,7 +283,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   if (self.didSelectItemBlock) {
-    self.didSelectItemBlock(indexPath.item % self.imageUrls.count);
+    HYBCollectionCell *cell = (HYBCollectionCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    self.didSelectItemBlock(indexPath.item % self.imageUrls.count, cell.imageView);
   }
 }
 
@@ -297,8 +297,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   // record
   self.previousPageIndex = itemIndex;
   
-  if (self.didScrollBlock) {
-    self.didScrollBlock(itemIndex);
+  CGFloat x = scrollView.contentOffset.x - self.collectionView.width;
+  NSUInteger index = fabs(x) / self.collectionView.width;
+  CGFloat fIndex = fabs(x) / self.collectionView.width;
+  
+  if (self.didScrollBlock && fabs(fIndex - (CGFloat)index) <= 0.00001) {
+    HYBCollectionCell *cell = (HYBCollectionCell *)[self collectionView:self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
+    self.didScrollBlock(itemIndex, cell.imageView);
   }
 }
 

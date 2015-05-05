@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HYBLoadImageView.h"
 
 /**
  *  The alignment type of page control. Only has two types.
  *  That is: center and right.
  */
-typedef NS_ENUM(NSInteger, HYBPageControlAlignment){
+typedef NS_ENUM(NSInteger, HYBPageControlAlignment) {
   /**
    *  For the center type, only show the page control without any text
    */
@@ -30,14 +31,14 @@ typedef NS_ENUM(NSInteger, HYBPageControlAlignment){
  *
  *  @param atIndex  The index of the clicked item in the loop scroll view
  */
-typedef void (^HYBLoopScrollViewDidSelectItemBlock)(NSInteger atIndex);
+typedef void (^HYBLoopScrollViewDidSelectItemBlock)(NSInteger atIndex, HYBLoadImageView *sender);
 
 /**
  *  Call back method when scroll to an item at index.
  *
  *  @param toIndex The index of page
  */
-typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex);
+typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageView *sender);
 
 /**
  *  This is the main control for loop ad scroll. In the app, we offen need to scroll 
