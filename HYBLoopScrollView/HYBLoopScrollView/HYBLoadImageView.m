@@ -178,6 +178,9 @@
 }
 
 - (void)downloadWithReqeust:(NSURLRequest *)theRequest holder:(UIImage *)holder {
+  // 每次都先取消之前的请求
+  [self cancelImageRequestOperation];
+  
   __weak typeof(self) welfSelf = self;
   UIImage *cachedImage = [[[self class] sharedImageCache] cachedImageForRequest:theRequest];
   if (cachedImage) {
