@@ -9,24 +9,18 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  If you want to customize page control, you can put your code here.
- *  Maybe I will update my code here in the future if I have this kind 
- *  of supply. 
+ *  If you want to design a very beautiful page control, you can change it.
+ *  Or you can send your require to my email, and I will try my best to add
+ *  what you want.
  *
- *  Contact me if you want some kind of UI, I will try my best to update.
+ *  Contact me if you want some kind of animation, I will try my best to update.
  *
  *  @author huangyibiao
  *  @email  huangyibiao520@163.com
  *  @github https://github.com/632840804
- *  @blog   http://blog.csdn.net/woaifen3344
+ *  @blog   http://www.hybblog.com/ios-loopscrollview/
  *
- *  @note Make friends with me. 
- *        Facebook: huangyibiao520@163.com (Jacky Huang)
- *        QQ:(632840804) 
- *        Weixin:(huangyibiao520)
- *        Please tell me your real name when you send message to me.3Q.
- */
-@interface HYBPageControl : UIPageControl
+ */@interface HYBPageControl : UIPageControl
 
 /**
  *  The call back when click a page control to switch to another page.

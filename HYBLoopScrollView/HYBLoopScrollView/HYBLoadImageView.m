@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 黄仪标. All rights reserved.
 //
 
+#import "UIView+HYBUIViewCommon.h"
 #import "HYBLoadImageView.h"
 #import "UIImageView+AFNetworking.h"
 #import "AFHTTPRequestOperationManager.h"
@@ -49,10 +50,11 @@
   [self setContentScaleFactor:[[UIScreen mainScreen] scale]];
   
   self.animated = YES;
-  self.borderColor = [UIColor lightGrayColor];
-  self.borderWidth = 0.0;
-  self.corneradus = 0.0;
+  self.hyb_borderColor = [UIColor lightGrayColor];
+  self.hyb_borderWidth = 0.0;
+  self.hyb_corneradus = 0.0;
   self.isCircle = NO;
+  
   return;
 }
 
@@ -80,12 +82,13 @@
 
 - (void)setIsCircle:(BOOL)isCircle {
   if (isCircle) {
-    if (self.width != self.height) {
-      self.size = CGSizeMake(MIN(self.width, self.height), MIN(self.width, self.height));
+    if (self.hyb_width != self.hyb_height) {
+      self.hyb_size = CGSizeMake(MIN(self.hyb_width, self.hyb_height),
+                                 MIN(self.hyb_width, self.hyb_height));
     }
-    self.layer.cornerRadius = self.width / 2.0;
+    self.hyb_corneradus = self.hyb_width / 2.0;
   } else {
-    self.layer.cornerRadius = 0.0;
+    self.hyb_corneradus = 0.0;
   }
   return;
 }
@@ -117,34 +120,6 @@
 
 - (BOOL)isCircle {
   return self.layer.cornerRadius > 0.0;
-}
-
-- (void)setCorneradus:(CGFloat)corneradus {
-  if (fabs(corneradus - self.layer.cornerRadius) <= 0.0000001) {
-    
-  } else {
-    self.layer.cornerRadius = corneradus;
-  }
-}
-
-- (CGFloat)corneradus {
-  return self.layer.cornerRadius;
-}
-
-- (void)setBorderColor:(UIColor *)borderColor {
-  self.layer.borderColor = borderColor.CGColor;
-}
-
-- (UIColor *)borderColor {
-  return [UIColor colorWithCGColor:self.layer.borderColor];
-}
-
-- (void)setBorderWidth:(CGFloat)borderWidth {
-  self.layer.borderWidth = borderWidth;
-}
-
-- (CGFloat)borderWidth {
-  return self.layer.borderWidth;
 }
 
 - (void)setImageWithURLString:(NSString *)url
@@ -181,7 +156,7 @@
   // 每次都先取消之前的请求
   [self cancelImageRequestOperation];
   
-  __weak typeof(self) welfSelf = self;
+  __weak __typeof(self) welfSelf = self;
   UIImage *cachedImage = [[[self class] sharedImageCache] cachedImageForRequest:theRequest];
   if (cachedImage) {
     [self setImage:cachedImage isFromCache:YES];
@@ -209,6 +184,10 @@
              placeholderImage:(NSString *)placeholderImage
                    completion:(void (^)(UIImage *image))completion {
   [self setImageWithURLString:url placeholder:kImageWithName(placeholderImage) completion:completion];
+}
+
+- (void)cancelRequest {
+  [self cancelImageRequestOperation];
 }
 
 @end

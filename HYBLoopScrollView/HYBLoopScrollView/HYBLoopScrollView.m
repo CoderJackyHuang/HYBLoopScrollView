@@ -42,7 +42,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [super layoutSubviews];
   
   self.imageView.frame = self.bounds;
-  self.titleLabel.frame = CGRectMake(0, self.height - 30, self.width, 30);
+  self.titleLabel.frame = CGRectMake(0, self.hyb_height - 30, self.hyb_width, 30);
   self.titleLabel.hidden = self.titleLabel.text.length > 0 ? NO : YES;
 }
 
@@ -81,11 +81,27 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {
+  return [self loopScrollViewWithFrame:frame
+                             imageUrls:imageUrls
+                          timeInterval:5.0
+                             didSelect:nil
+                             didScroll:nil];
+}
+
++ (instancetype)loopScrollViewWithFrame:(CGRect)frame
+                              imageUrls:(NSArray *)imageUrls
+                           timeInterval:(NSTimeInterval)timeInterval
+                              didSelect:(HYBLoopScrollViewDidSelectItemBlock)didSelect
+                              didScroll:(HYBLoopScrollViewDidScrollBlock)didScroll {
   HYBLoopScrollView *loopView = [[HYBLoopScrollView alloc] initWithFrame:frame];
   loopView.imageUrls = imageUrls;
+  loopView.timeInterval = timeInterval;
+  loopView.didScrollBlock = didScroll;
+  loopView.didSelectItemBlock = didSelect;
   
   return loopView;
 }
+
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
@@ -142,7 +158,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     _pageControlEnabled = pageControlEnabled;
     
     if (_pageControlEnabled) {
-      __weak typeof(self) weakSelf = self;
+      __weak __typeof(self) weakSelf = self;
       self.pageControl.valueChangedBlock = ^(NSInteger clickedAtIndex) {
               NSInteger curIndex = (weakSelf.collectionView.contentOffset.x
                                     + weakSelf.layout.itemSize.width * 0.5) / weakSelf.layout.itemSize.width;
@@ -169,14 +185,14 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [self bringSubviewToFront:self.pageControl];
   self.pageControl.numberOfPages = self.imageUrls.count;
  CGSize size = [self.pageControl sizeForNumberOfPages:self.imageUrls.count];
-  self.pageControl.size = size;
+  self.pageControl.hyb_size = size;
   
   if (self.alignment == kPageControlAlignCenter) {
-    self.pageControl.originX = (self.width - self.pageControl.width) / 2.0;
+    self.pageControl.hyb_originX = (self.hyb_width - self.pageControl.hyb_width) / 2.0;
   } else if (self.alignment == kPageControlAlignRight) {
-    self.pageControl.rightX = self.width - 10;
+    self.pageControl.hyb_rightX = self.hyb_width - 10;
   }
-  self.pageControl.originY = self.height - self.pageControl.height + 5;
+  self.pageControl.hyb_originY = self.hyb_height - self.pageControl.hyb_height + 5;
 }
 
 - (void)setTimeInterval:(NSTimeInterval)timeInterval {
@@ -264,6 +280,12 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   HYBCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier
                                                                       forIndexPath:indexPath];
   
+  // 先取消之前的请求
+  HYBLoadImageView *preImageView = cell.imageView;
+  if ([preImageView isKindOfClass:[HYBLoadImageView class]]) {
+    [preImageView cancelRequest];
+  }
+  
   NSInteger itemIndex = indexPath.item % self.imageUrls.count;
   if (itemIndex < self.imageUrls.count) {
     NSString *urlString = self.imageUrls[itemIndex];
@@ -294,16 +316,17 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-  int itemIndex = (scrollView.contentOffset.x + self.collectionView.width * 0.5) / self.collectionView.width;
+  int itemIndex = (scrollView.contentOffset.x +
+                   self.collectionView.hyb_width * 0.5) / self.collectionView.hyb_width;
   itemIndex = itemIndex % self.imageUrls.count;
   _pageControl.currentPage = itemIndex;
   
   // record
   self.previousPageIndex = itemIndex;
   
-  CGFloat x = scrollView.contentOffset.x - self.collectionView.width;
-  NSUInteger index = fabs(x) / self.collectionView.width;
-  CGFloat fIndex = fabs(x) / self.collectionView.width;
+  CGFloat x = scrollView.contentOffset.x - self.collectionView.hyb_width;
+  NSUInteger index = fabs(x) / self.collectionView.hyb_width;
+  CGFloat fIndex = fabs(x) / self.collectionView.hyb_width;
   
   if (self.didScrollBlock && fabs(fIndex - (CGFloat)index) <= 0.00001) {
     HYBCollectionCell *cell = (HYBCollectionCell *)[self collectionView:self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
@@ -318,120 +341,6 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
   [self configTimer];
-}
-
-@end
-
-
-/**
- *  UIView category
- */
-@implementation UIView (Ext)
-
-- (CGFloat)originX {
-  return self.frame.origin.x;
-}
-
-- (void)setOriginX:(CGFloat)originX {
-  CGRect frame = self.frame;
-  frame.origin.x = originX;
-  self.frame = frame;
-  return;
-}
-
-- (CGFloat)originY {
-  return self.frame.origin.y;
-}
-
-- (void)setOriginY:(CGFloat)originY {
-  CGRect frame = self.frame;
-  frame.origin.y = originY;
-  self.frame = frame;
-  return;
-}
-
-- (CGFloat)rightX {
-  return [self originX] + [self width];
-}
-
-- (void)setRightX:(CGFloat)rightX {
-  CGRect frame = self.frame;
-  frame.origin.x = rightX - [self width];
-  self.frame = frame;
-  return;
-}
-
-- (CGFloat)bottomY {
-  return [self originY] + [self height];
-}
-
-- (void)setBottomY:(CGFloat)bottomY {
-  CGRect frame = self.frame;
-  frame.origin.y = bottomY - [self height];
-  self.frame = frame;
-  return;
-}
-
-- (CGFloat)centerX {
-  return self.center.x;
-}
-
-- (void)setCenterX:(CGFloat)centerX {
-  self.center = CGPointMake(centerX, self.center.y);
-  return;
-}
-
-- (CGFloat)centerY {
-  return self.center.y;
-}
-
-- (void)setCenterY:(CGFloat)centerY {
-  self.center = CGPointMake(self.center.x, centerY);
-  return;
-}
-
-- (CGFloat)width {
-  return self.frame.size.width;
-}
-
-- (void)setWidth:(CGFloat)width {
-  CGRect frame = self.frame;
-  frame.size.width = width;
-  self.frame = frame;
-  return;
-}
-
-- (CGFloat)height {
-  return self.frame.size.height;
-}
-
-- (void)setHeight:(CGFloat)height {
-  CGRect frame = self.frame;
-  frame.size.height = height;
-  self.frame = frame;
-  return;
-}
-
-- (CGPoint)origin {
-  return self.frame.origin;
-}
-
-- (void)setOrigin:(CGPoint)origin {
-  CGRect frame = self.frame;
-  frame.origin = origin;
-  self.frame = frame;
-  return;
-}
-
-- (CGSize)size {
-  return self.frame.size;
-}
-
-- (void)setSize:(CGSize)size {
-  CGRect frame = self.frame;
-  frame.size = size;
-  self.frame = frame;
-  return;
 }
 
 @end

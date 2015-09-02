@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		690C27481B969E82004CA276 /* UIView+HYBUIViewCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 690C27471B969E82004CA276 /* UIView+HYBUIViewCommon.m */; };
 		693CEB9C1ACBC749005FD2DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEB9B1ACBC749005FD2DC /* main.m */; };
 		693CEB9F1ACBC749005FD2DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEB9E1ACBC749005FD2DC /* AppDelegate.m */; };
 		693CEBA21ACBC749005FD2DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBA11ACBC749005FD2DC /* ViewController.m */; };
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		690C27461B969E82004CA276 /* UIView+HYBUIViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+HYBUIViewCommon.h"; path = "HYBLoopScrollView/UIView+HYBUIViewCommon.h"; sourceTree = "<group>"; };
+		690C27471B969E82004CA276 /* UIView+HYBUIViewCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+HYBUIViewCommon.m"; path = "HYBLoopScrollView/UIView+HYBUIViewCommon.m"; sourceTree = "<group>"; };
 		693CEB961ACBC749005FD2DC /* HYBLoopScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HYBLoopScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		693CEB9A1ACBC749005FD2DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		693CEB9B1ACBC749005FD2DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				693CEBC41ACBC7E7005FD2DC /* HYBLoopScrollView.m */,
 				69A2634F1ACBD25C0059044B /* HYBPageControl.h */,
 				69A263501ACBD25C0059044B /* HYBPageControl.m */,
+				690C27461B969E82004CA276 /* UIView+HYBUIViewCommon.h */,
+				690C27471B969E82004CA276 /* UIView+HYBUIViewCommon.m */,
 			);
 			name = HYBLoopScrollView;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				693CEBC51ACBC7E7005FD2DC /* HYBLoopScrollView.m in Sources */,
 				693CEB9C1ACBC749005FD2DC /* main.m in Sources */,
 				69A2634E1ACBCDC20059044B /* HYBLoadImageView.m in Sources */,
+				690C27481B969E82004CA276 /* UIView+HYBUIViewCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +426,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = HYBLoopScrollView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -433,7 +439,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = HYBLoopScrollView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

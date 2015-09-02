@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HYBPageControl.h"
 #import "HYBLoadImageView.h"
+#import "UIView+HYBUIViewCommon.h"
 
 /**
  *  The alignment type of page control. Only has two types.
@@ -42,22 +43,18 @@ typedef void (^HYBLoopScrollViewDidSelectItemBlock)(NSInteger atIndex, HYBLoadIm
 typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageView *sender);
 
 /**
- *  This is the main control for loop ad scroll. In the app, we offen need to scroll 
- *  ad images in loop, and I have try to search some third party open source, but no
- *  one is really for common use. So I try to create one for every one and for myself.
+ *  This is an really useful image loading control, you can use to load image to an
+ *  UImageView control, with it, will be more convenience to globally download image
+ *  asynchronously. Here there are some useful features, but haven't used. Don't delete
+ *  them.
  *
- *  Contact me if any bug appears, I will try my best to update.
+ *  Contact me if you want some kind of animation, I will try my best to update.
  *
  *  @author huangyibiao
  *  @email  huangyibiao520@163.com
  *  @github https://github.com/632840804
- *  @blog   http://blog.csdn.net/woaifen3344
+ *  @blog   http://www.hybblog.com/ios-loopscrollview/
  *
- *  @note Make friends with me.
- *        Facebook: huangyibiao520@163.com (Jacky Huang)
- *        QQ:(632840804)
- *        Weixin:(huangyibiao520)
- *        Please tell me your real name when you send message to me.3Q.
  */
 @interface HYBLoopScrollView : UIView
 
@@ -127,6 +124,11 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
  *  @return The HYBLoopScrollView object.
  */
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls;
++ (instancetype)loopScrollViewWithFrame:(CGRect)frame
+                              imageUrls:(NSArray *)imageUrls
+                           timeInterval:(NSTimeInterval)timeInterval
+                              didSelect:(HYBLoopScrollViewDidSelectItemBlock)didSelect
+                              didScroll:(HYBLoopScrollViewDidScrollBlock)didScroll;
 
 /**
  *  Pause the timer. Usually you need to pause the timer when the view disappear.
@@ -138,67 +140,5 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
  *  the timer again when the view appear.
  */
 - (void)startTimer;
-
-@end
-
-@interface UIView (Ext)
-
-/**
- * @brief Shortcut for frame.origin.x.
- *        Sets frame.origin.x = originX
- */
-@property (nonatomic) CGFloat originX;
-
-/**
- * @brief Shortcut for frame.origin.y
- *        Sets frame.origin.y = originY
- */
-@property (nonatomic) CGFloat originY;
-
-/**
- * @brief Shortcut for frame.origin.x + frame.size.width
- *       Sets frame.origin.x = rightX - frame.size.width
- */
-@property (nonatomic) CGFloat rightX;
-
-/**
- * @brief Shortcut for frame.origin.y + frame.size.height
- *        Sets frame.origin.y = bottomY - frame.size.height
- */
-@property (nonatomic) CGFloat bottomY;
-
-/**
- * @brief Shortcut for frame.size.width
- *        Sets frame.size.width = width
- */
-@property (nonatomic) CGFloat width;
-
-/**
- * @brief Shortcut for frame.size.height
- *        Sets frame.size.height = height
- */
-@property (nonatomic) CGFloat height;
-
-/**
- * @brief Shortcut for center.x
- * Sets center.x = centerX
- */
-@property (nonatomic) CGFloat centerX;
-
-/**
- * @brief Shortcut for center.y
- *        Sets center.y = centerY
- */
-@property (nonatomic) CGFloat centerY;
-
-/**
- * @brief Shortcut for frame.origin
- */
-@property (nonatomic) CGPoint origin;
-
-/**
- * @brief Shortcut for frame.size
- */
-@property (nonatomic) CGSize size;
 
 @end

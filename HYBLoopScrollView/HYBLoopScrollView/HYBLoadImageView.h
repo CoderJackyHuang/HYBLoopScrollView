@@ -7,6 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class HYBLoadImageView;
+
+typedef void (^HYBTapImageViewBlock)(HYBLoadImageView *imageView);
+typedef void (^HYBImageBlock)(UIImage *image);
+
 /**
  *  This is an really useful image loading control, you can use to load image to an
  *  UImageView control, with it, will be more convenience to globally download image
@@ -18,13 +23,8 @@
  *  @author huangyibiao
  *  @email  huangyibiao520@163.com
  *  @github https://github.com/632840804
- *  @blog   http://blog.csdn.net/woaifen3344
+ *  @blog   http://www.hybblog.com/ios-loopscrollview/
  *
- *  @note Make friends with me.
- *        Facebook: huangyibiao520@163.com (Jacky Huang)
- *        QQ:(632840804)
- *        Weixin:(huangyibiao520)
- *        Please tell me your real name when you send message to me.3Q.
  */
 @interface HYBLoadImageView : UIImageView
 
@@ -42,29 +42,10 @@
 @property (nonatomic, assign) BOOL isCircle;
 
 /**
- *  Get/Set the control's corneradus
- *  Default is 0.0
- */
-@property (nonatomic, assign) CGFloat corneradus;
-
-/**
- *  Get/Set the control's border color
- *  Default is [UIColor lightGrayColor]
- */
-@property (nonatomic, strong) UIColor *borderColor;
-
-/**
- *  Get/Set the control's border width
- *  Default is 0.0
- */
-@property (nonatomic, assign) CGFloat borderWidth;
-
-/**
  *  Get/Set the callback block when download the image finished.
  *
  *  @param image The image object from network or from disk.
  */
-typedef void (^HYBImageBlock)(UIImage *image);
 @property (nonatomic, copy) HYBImageBlock completion;
 
 /**
@@ -75,7 +56,6 @@ typedef void (^HYBImageBlock)(UIImage *image);
  *
  *  @param imageView The event receiver.
  */
-typedef void (^HYBTapImageViewBlock)(HYBLoadImageView *imageView);
 @property (nonatomic, copy) HYBTapImageViewBlock tapImageViewBlock;
 
 /**
@@ -89,4 +69,7 @@ typedef void (^HYBTapImageViewBlock)(HYBLoadImageView *imageView);
 - (void)setImageWithURLString:(NSString *)url
              placeholderImage:(NSString *)placeholderImage
                    completion:(void (^)(UIImage *image))completion;
+
+- (void)cancelRequest;
+
 @end
