@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name         = "HYBLoopScrollView"
-  s.version      = "1.5"
+  s.version      = "2.0"
   s.summary      = "A strong and convenience control for ad loop scroll"
 
   s.description  = <<-DESC
@@ -12,11 +12,11 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  s.homepage     = "https://github.com/632840804/HYBLoopScrollView"
+  s.homepage     = "http://www.hybblog.com/ios-loopscrollview/"
  s.license      = "MIT"
-  s.author             = { "Jacky Huang" => "18675574495@163.com" }
+  s.author             = { "Jacky Huang" => "huangyibiao520@163.com" }
  s.platform     = :ios, '6.0'
-  s.source       = { :git => "https://github.com/632840804/HYBLoopScrollView.git", :tag => "1.5" }
+  s.source       = { :git => "https://github.com/632840804/HYBLoopScrollView.git", :tag => "2.0" }
  s.source_files  = "HYBLoopScrollView/HYBLoopScrollview/*"
 
   # s.public_header_files = "Classes/**/*.h"

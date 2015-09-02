@@ -11,8 +11,6 @@
 		693CEB9C1ACBC749005FD2DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEB9B1ACBC749005FD2DC /* main.m */; };
 		693CEB9F1ACBC749005FD2DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEB9E1ACBC749005FD2DC /* AppDelegate.m */; };
 		693CEBA21ACBC749005FD2DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBA11ACBC749005FD2DC /* ViewController.m */; };
-		693CEBA71ACBC749005FD2DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693CEBA61ACBC749005FD2DC /* Images.xcassets */; };
-		693CEBB61ACBC749005FD2DC /* HYBLoopScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBB51ACBC749005FD2DC /* HYBLoopScrollViewTests.m */; };
 		693CEBC51ACBC7E7005FD2DC /* HYBLoopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 693CEBC41ACBC7E7005FD2DC /* HYBLoopScrollView.m */; };
 		69A2634E1ACBCDC20059044B /* HYBLoadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A2634D1ACBCDC20059044B /* HYBLoadImageView.m */; };
 		69A263511ACBD25C0059044B /* HYBPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A263501ACBD25C0059044B /* HYBPageControl.m */; };
@@ -22,16 +20,6 @@
 		69A263591ACBDE690059044B /* h4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69A263551ACBDE690059044B /* h4.jpg */; };
 		D4966024FA23BF6BA4AF21F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC2AA8552D2A5361D1A5686 /* libPods.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		693CEBB01ACBC749005FD2DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 693CEB8E1ACBC749005FD2DC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 693CEB951ACBC749005FD2DC;
-			remoteInfo = HYBLoopScrollView;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		690C27461B969E82004CA276 /* UIView+HYBUIViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+HYBUIViewCommon.h"; path = "HYBLoopScrollView/UIView+HYBUIViewCommon.h"; sourceTree = "<group>"; };
@@ -43,10 +31,6 @@
 		693CEB9E1ACBC749005FD2DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		693CEBA01ACBC749005FD2DC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		693CEBA11ACBC749005FD2DC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		693CEBA61ACBC749005FD2DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		693CEBAF1ACBC749005FD2DC /* HYBLoopScrollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HYBLoopScrollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		693CEBB41ACBC749005FD2DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		693CEBB51ACBC749005FD2DC /* HYBLoopScrollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HYBLoopScrollViewTests.m; sourceTree = "<group>"; };
 		693CEBC31ACBC7E7005FD2DC /* HYBLoopScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYBLoopScrollView.h; path = HYBLoopScrollView/HYBLoopScrollView.h; sourceTree = "<group>"; };
 		693CEBC41ACBC7E7005FD2DC /* HYBLoopScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYBLoopScrollView.m; path = HYBLoopScrollView/HYBLoopScrollView.m; sourceTree = "<group>"; };
 		69A2634C1ACBCDC20059044B /* HYBLoadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYBLoadImageView.h; path = HYBLoopScrollView/HYBLoadImageView.h; sourceTree = "<group>"; };
@@ -71,13 +55,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		693CEBAC1ACBC749005FD2DC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -94,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				693CEB981ACBC749005FD2DC /* HYBLoopScrollView */,
-				693CEBB21ACBC749005FD2DC /* HYBLoopScrollViewTests */,
 				693CEB971ACBC749005FD2DC /* Products */,
 				29C69E21CA17EF87AD30A037 /* Pods */,
 				CF7EF72A4F8002ED95B1454B /* Frameworks */,
@@ -105,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				693CEB961ACBC749005FD2DC /* HYBLoopScrollView.app */,
-				693CEBAF1ACBC749005FD2DC /* HYBLoopScrollViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,7 +93,6 @@
 				693CEB9E1ACBC749005FD2DC /* AppDelegate.m */,
 				693CEBA01ACBC749005FD2DC /* ViewController.h */,
 				693CEBA11ACBC749005FD2DC /* ViewController.m */,
-				693CEBA61ACBC749005FD2DC /* Images.xcassets */,
 				693CEB991ACBC749005FD2DC /* Supporting Files */,
 			);
 			path = HYBLoopScrollView;
@@ -133,23 +107,6 @@
 				69A263551ACBDE690059044B /* h4.jpg */,
 				693CEB9A1ACBC749005FD2DC /* Info.plist */,
 				693CEB9B1ACBC749005FD2DC /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		693CEBB21ACBC749005FD2DC /* HYBLoopScrollViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				693CEBB51ACBC749005FD2DC /* HYBLoopScrollViewTests.m */,
-				693CEBB31ACBC749005FD2DC /* Supporting Files */,
-			);
-			path = HYBLoopScrollViewTests;
-			sourceTree = "<group>";
-		};
-		693CEBB31ACBC749005FD2DC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				693CEBB41ACBC749005FD2DC /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -199,24 +156,6 @@
 			productReference = 693CEB961ACBC749005FD2DC /* HYBLoopScrollView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		693CEBAE1ACBC749005FD2DC /* HYBLoopScrollViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 693CEBBC1ACBC749005FD2DC /* Build configuration list for PBXNativeTarget "HYBLoopScrollViewTests" */;
-			buildPhases = (
-				693CEBAB1ACBC749005FD2DC /* Sources */,
-				693CEBAC1ACBC749005FD2DC /* Frameworks */,
-				693CEBAD1ACBC749005FD2DC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				693CEBB11ACBC749005FD2DC /* PBXTargetDependency */,
-			);
-			name = HYBLoopScrollViewTests;
-			productName = HYBLoopScrollViewTests;
-			productReference = 693CEBAF1ACBC749005FD2DC /* HYBLoopScrollViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -228,10 +167,6 @@
 				TargetAttributes = {
 					693CEB951ACBC749005FD2DC = {
 						CreatedOnToolsVersion = 6.2;
-					};
-					693CEBAE1ACBC749005FD2DC = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 693CEB951ACBC749005FD2DC;
 					};
 				};
 			};
@@ -249,7 +184,6 @@
 			projectRoot = "";
 			targets = (
 				693CEB951ACBC749005FD2DC /* HYBLoopScrollView */,
-				693CEBAE1ACBC749005FD2DC /* HYBLoopScrollViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -261,16 +195,8 @@
 			files = (
 				69A263591ACBDE690059044B /* h4.jpg in Resources */,
 				69A263561ACBDE690059044B /* h1.jpg in Resources */,
-				693CEBA71ACBC749005FD2DC /* Images.xcassets in Resources */,
 				69A263571ACBDE690059044B /* h3.jpg in Resources */,
 				69A263581ACBDE690059044B /* h2.jpg in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		693CEBAD1ACBC749005FD2DC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,23 +250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		693CEBAB1ACBC749005FD2DC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				693CEBB61ACBC749005FD2DC /* HYBLoopScrollViewTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		693CEBB11ACBC749005FD2DC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 693CEB951ACBC749005FD2DC /* HYBLoopScrollView */;
-			targetProxy = 693CEBB01ACBC749005FD2DC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		693CEBB71ACBC749005FD2DC /* Debug */ = {
@@ -423,12 +333,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D61DE45CF941C2F40CAE4B44 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				INFOPLIST_FILE = HYBLoopScrollView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = (
+					"-Wno-objc-designated-initializers",
+					"-Wno-nonnull",
+				);
 			};
 			name = Debug;
 		};
@@ -436,46 +349,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF543CC920A3CE8083A69FA8 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				INFOPLIST_FILE = HYBLoopScrollView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		693CEBBD1ACBC749005FD2DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
+				WARNING_CFLAGS = (
+					"-Wno-objc-designated-initializers",
+					"-Wno-nonnull",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = HYBLoopScrollViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HYBLoopScrollView.app/HYBLoopScrollView";
-			};
-			name = Debug;
-		};
-		693CEBBE1ACBC749005FD2DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = HYBLoopScrollViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HYBLoopScrollView.app/HYBLoopScrollView";
 			};
 			name = Release;
 		};
@@ -496,15 +378,6 @@
 			buildConfigurations = (
 				693CEBBA1ACBC749005FD2DC /* Debug */,
 				693CEBBB1ACBC749005FD2DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		693CEBBC1ACBC749005FD2DC /* Build configuration list for PBXNativeTarget "HYBLoopScrollViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				693CEBBD1ACBC749005FD2DC /* Debug */,
-				693CEBBE1ACBC749005FD2DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

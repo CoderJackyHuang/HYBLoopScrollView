@@ -47,9 +47,9 @@
   
   
   HYBLoopScrollView *loop1 = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, loop.hyb_bottomY + 100, 320, 120) imageUrls:images timeInterval:10.0 didSelect:^(NSInteger atIndex, HYBLoadImageView *sender) {
-    NSLog(@"clicked item at index: %ld", atIndex);
+    NSLog(@"clicked item at index: %ld", (long)atIndex);
   } didScroll:^(NSInteger toIndex, HYBLoadImageView *sender) {
-    NSLog(@"scroll to index: %ld", toIndex);
+    NSLog(@"scroll to index: %ld", (long)toIndex);
   }];
   
 
