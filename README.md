@@ -1,5 +1,5 @@
 # HYBLoopScrollView
-A strong and convenience control for ad loop scroll
+App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助。
 
 ##喜讯
 HYBLoopScrollView升级到2.0版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
@@ -25,7 +25,7 @@ or you can download the zip file and drag the HYBLoopScrollView folder to your p
 此处不添加如何使用说明，请稳步到作者的博客阅读博文：http://www.hybblog.com/ios-loopscrollview/
 
 
-##Thanks
+##致谢
 Thanks to github, I learn a lot from friends in github.<br/>
 Thanks to AFNetworking author.<br/>
 If there is any bug, contact me huangyibiao520@163.com.
