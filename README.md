@@ -30,6 +30,8 @@ Thanks to github, I learn a lot from friends in github.<br/>
 Thanks to AFNetworking author.<br/>
 If there is any bug, contact me huangyibiao520@163.com.
 
+##关注我
+欢迎关注微信号：iOSDevShares
 
 ##Knowledge
 If your app adopts my lib, hope you can send me an email,just make me know who uses it.<br/>
