@@ -32,6 +32,7 @@ If there is any bug, contact me huangyibiao520@163.com.
 
 ##关注我
 欢迎关注微信号：iOSDevShares
+![image](https://github.com/CoderJackyHuang/IOSCallJsOrJsCallIOS/blob/master/wx.jpg)
 
 ##Knowledge
 If your app adopts my lib, hope you can send me an email,just make me know who uses it.<br/>
