@@ -13,11 +13,13 @@ HYBLoopScrollView升级到2.0版本了，作者的个人博客中有关于HYBLoo
 追加了常用的UIView扩展，简化了API的调用。
 最重要的是，fix了朋友们反馈的bug，优化了大图加载时，快速滚动的效果
 
+#Version2.1版本
+解决了调用8.0api而没有判断处理的bug。
+
 ##安装
 Use cocopods:
 ```
-platform :ios, "6.0"
-pod "HYBLoopScrollView", '~> 2.0'
+pod "HYBLoopScrollView", '~> 2.1'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
