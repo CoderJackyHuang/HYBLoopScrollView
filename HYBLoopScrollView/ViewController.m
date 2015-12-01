@@ -35,10 +35,10 @@
   loop.timeInterval = 10;
   loop.placeholder = [UIImage imageNamed:@"h1.jpg"];
   loop.didSelectItemBlock = ^(NSInteger atIndex, HYBLoadImageView *sender) {
-  //  NSLog(@"clicked item at index: %ld", atIndex);
+    NSLog(@"clicked item at index: %ld", atIndex);
   };
   loop.didScrollBlock = ^(NSInteger atIndex, HYBLoadImageView *sender) {
-  //  NSLog(@"scroll to index: %ld", atIndex);
+    NSLog(@"scroll to index: %ld", atIndex);
   };
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;
@@ -54,12 +54,13 @@
   
 
   [self.view addSubview:loop1];
-
+  
+  [self performSelector:@selector(removeLoop:) withObject:loop afterDelay:2];
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+- (void)removeLoop:(HYBLoopScrollView *)sender {
+  [sender removeFromSuperview];
+  sender = nil;
 }
 
 @end

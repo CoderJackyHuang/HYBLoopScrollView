@@ -64,6 +64,10 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 @implementation HYBLoopScrollView
 
+- (void)dealloc {
+  NSLog(@"hybloopscrollview dealloc");
+}
+
 - (void)pauseTimer {
   if (self.timer) {
     [self.timer setFireDate:[NSDate distantFuture]];
@@ -78,6 +82,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (HYBPageControl *)pageControl {
   return _pageControl;
+}
+
+- (void)removeFromSuperview {
+  [self.timer invalidate];
+  self.timer = nil;
+  
+  [super removeFromSuperview];
 }
 
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {
@@ -138,19 +149,20 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)configTimer {
-  [_timer invalidate];
-  _timer = nil;
-  
   if (self.imageUrls.count <= 1) {
     return;
   }
   
-  _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval
-                                            target:self
-                                          selector:@selector(autoScroll)
-                                          userInfo:nil
-                                           repeats:YES];
-  [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+  if (self.timer != nil) {
+    [self startTimer];
+    return;
+  }
+  
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval
+                                                target:self
+                                              selector:@selector(autoScroll)
+                                              userInfo:nil
+                                               repeats:YES];
 }
 
 - (void)setPageControlEnabled:(BOOL)pageControlEnabled {
@@ -160,13 +172,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     if (_pageControlEnabled) {
       __weak __typeof(self) weakSelf = self;
       self.pageControl.valueChangedBlock = ^(NSInteger clickedAtIndex) {
-              NSInteger curIndex = (weakSelf.collectionView.contentOffset.x
-                                    + weakSelf.layout.itemSize.width * 0.5) / weakSelf.layout.itemSize.width;
+        NSInteger curIndex = (weakSelf.collectionView.contentOffset.x
+                              + weakSelf.layout.itemSize.width * 0.5) / weakSelf.layout.itemSize.width;
         NSInteger toIndex = curIndex + (clickedAtIndex > weakSelf.previousPageIndex ? clickedAtIndex : -clickedAtIndex);
         [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]
-                                    atScrollPosition:UICollectionViewScrollPositionNone
-                                            animated:YES];
-
+                                        atScrollPosition:UICollectionViewScrollPositionNone
+                                                animated:YES];
+        
       };
     } else {
       self.pageControl.valueChangedBlock = nil;
@@ -184,7 +196,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   
   [self bringSubviewToFront:self.pageControl];
   self.pageControl.numberOfPages = self.imageUrls.count;
- CGSize size = [self.pageControl sizeForNumberOfPages:self.imageUrls.count];
+  CGSize size = [self.pageControl sizeForNumberOfPages:self.imageUrls.count];
   self.pageControl.hyb_size = size;
   
   if (self.alignment == kPageControlAlignCenter) {
@@ -208,7 +220,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   NSIndexPath *indexPath = nil;
   if (toIndex == self.totalPageCount) {
     toIndex = self.totalPageCount * 0.5;
-  
+    
     // scroll to the middle without animation, and scroll to middle with animation, so that it scrolls
     // more smoothly.
     indexPath = [NSIndexPath indexPathForItem:toIndex inSection:0];
@@ -235,8 +247,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
       self.collectionView.scrollEnabled = YES;
     } else {
       // If there is only one page, stop the timer and make scroll enabled to be NO.
-      [_timer invalidate];
-      _timer = nil;
+      [self pauseTimer];
+      
       self.totalPageCount = 1;
       [self configPageControl];
       self.collectionView.scrollEnabled = NO;
@@ -335,8 +347,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-  [_timer invalidate];
-  _timer = nil;
+  [self pauseTimer];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

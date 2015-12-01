@@ -22,8 +22,8 @@ typedef void (^HYBImageBlock)(UIImage *image);
  *
  *  @author huangyibiao
  *  @email  huangyibiao520@163.com
- *  @github https://github.com/632840804
- *  @blog   http://www.hybblog.com/ios-loopscrollview/
+ *  @github https://github.com/CoderJackyHuang
+ *  @blog   http://www.henishuo.com/ios-open-source-hybloopscrollview/
  *
  */
 @interface HYBLoadImageView : UIImageView

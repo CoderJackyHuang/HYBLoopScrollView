@@ -16,10 +16,13 @@ HYBLoopScrollView升级到2.0版本了，作者的个人博客中有关于HYBLoo
 #Version2.1版本
 解决了调用8.0api而没有判断处理的bug。
 
+#Version2.2版本
+解决了内存得不到释放的bug
+
 ##安装
 Use cocopods:
 ```
-pod "HYBLoopScrollView", '~> 2.1'
+pod "HYBLoopScrollView", '~> 2.2'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
