@@ -2,7 +2,7 @@
 App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助。
 
 ##喜讯
-HYBLoopScrollView升级到2.0版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
+HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
 请移步：http://www.hybblog.com/ios-loopscrollview/
 
 
@@ -36,7 +36,9 @@ Thanks to AFNetworking author.<br/>
 If there is any bug, contact me huangyibiao520@163.com.
 
 ##关注我
-欢迎关注微信号：iOSDevShares
+
+**有问必答QQ群：324400294**<br/>
+**欢迎关注微信号：iOSDevShares**
 ![image](https://github.com/CoderJackyHuang/IOSCallJsOrJsCallIOS/blob/master/wx.jpg)
 
 ##Knowledge
