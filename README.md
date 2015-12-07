@@ -19,6 +19,9 @@ HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoo
 #Version2.2版本
 解决了内存得不到释放的bug
 
+#Version2.2.1版本
+解决调用暂停定时器仍然不起作用的bug
+
 ##安装
 Use cocopods:
 ```

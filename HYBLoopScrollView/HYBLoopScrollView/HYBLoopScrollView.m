@@ -154,7 +154,6 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   }
   
   if (self.timer != nil) {
-    [self startTimer];
     return;
   }
   
