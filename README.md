@@ -30,7 +30,7 @@ pod "HYBLoopScrollView", '~> 2.2'
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
 ##如何使用
-简单说明已经放到博客：[http://henishuo.com/archives/242](http://henishuo.com/archives/242)
+简单说明已经放到博客：[http://www.hybblog.com/ios-loopscrollview/](http://www.hybblog.com/ios-loopscrollview/)
 
 
 ##致谢
