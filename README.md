@@ -3,7 +3,7 @@ App中不可或缺的广告轮播图组件，现在开源出来了，希望对�
 
 ##喜讯
 HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
-请移步：http://www.hybblog.com/ios-loopscrollview/
+请移步：[http://www.henishuo.com/ios-open-source-hybloopscrollview/](http://www.henishuo.com/ios-open-source-hybloopscrollview/)
 
 
 ##效果图
@@ -30,7 +30,7 @@ pod "HYBLoopScrollView", '~> 2.2'
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
 ##如何使用
-简单说明已经放到博客：[http://www.hybblog.com/ios-loopscrollview/](http://www.hybblog.com/ios-loopscrollview/)
+简单说明已经放到博客：[http://www.henishuo.com/ios-open-source-hybloopscrollview/](http://www.henishuo.com/ios-open-source-hybloopscrollview/)
 
 
 ##致谢
