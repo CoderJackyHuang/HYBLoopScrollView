@@ -32,7 +32,7 @@
                       ];
   
   HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images];
-  loop.timeInterval = 10;
+  loop.timeInterval = 5;
   loop.placeholder = [UIImage imageNamed:@"h1.jpg"];
   loop.didSelectItemBlock = ^(NSInteger atIndex, HYBLoadImageView *sender) {
     NSLog(@"clicked item at index: %ld", atIndex);
@@ -55,12 +55,7 @@
 
   [self.view addSubview:loop1];
   
-  [self performSelector:@selector(removeLoop:) withObject:loop afterDelay:2];
 }
 
-- (void)removeLoop:(HYBLoopScrollView *)sender {
-  [sender removeFromSuperview];
-  sender = nil;
-}
 
 @end

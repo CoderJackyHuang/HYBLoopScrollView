@@ -17,6 +17,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 @property (nonatomic, strong) HYBLoadImageView *imageView;
 @property (nonatomic, strong) UILabel          *titleLabel;
+@property (nonatomic, assign) BOOL             isDragging;
 
 @end
 
@@ -350,7 +351,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-  [self configTimer];
+  [self performSelector:@selector(startTimer) withObject:nil afterDelay:self.timeInterval];
 }
 
 @end
