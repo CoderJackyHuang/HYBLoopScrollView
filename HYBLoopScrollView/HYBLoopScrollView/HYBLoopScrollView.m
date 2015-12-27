@@ -77,7 +77,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)startTimer {
   if (self.timer) {
-    [self.timer setFireDate:[NSDate distantPast]];
+    [self.timer performSelector:@selector(setFireDate:)
+                     withObject:[NSDate distantPast]
+                     afterDelay:self.timeInterval];
   }
 }
 
@@ -163,6 +165,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
                                               selector:@selector(autoScroll)
                                               userInfo:nil
                                                repeats:YES];
+  // 只有在App正常状态下才会回调定时器，在应用滚动scrollview等时，会自动切换模式，也就不会回调定时器
+  [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)setPageControlEnabled:(BOOL)pageControlEnabled {
