@@ -71,14 +71,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)pauseTimer {
   if (self.timer) {
-    [self.timer setFireDate:[NSDate distantFuture]];
+      [self.timer invalidate];
+      self.timer = nil;
   }
 }
 
 - (void)startTimer {
-  if (self.timer) {
-    [self.timer setFireDate:[NSDate distantPast]];
-  }
+    [self configTimer];
 }
 
 - (HYBPageControl *)pageControl {
@@ -163,6 +162,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
                                               selector:@selector(autoScroll)
                                               userInfo:nil
                                                repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)setPageControlEnabled:(BOOL)pageControlEnabled {
