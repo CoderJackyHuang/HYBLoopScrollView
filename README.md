@@ -7,7 +7,7 @@ HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoo
 
 
 ##效果图
-![image](https://github.com/632840804/HYBLoopScrollView/blob/master/screen.png)
+![image](https://github.com/632840804/HYBLoopScrollView/blob/master/screen.gif)
 
 ##发生了什么变化
 追加了常用的UIView扩展，简化了API的调用。
