@@ -28,10 +28,13 @@ HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoo
 #Version 2.2.3版本
 处理定时器从暂停状态进入重新开启状态时，会连续切换的bug。
 
+#Version 2.2.4版本
+处理图片数据传nil或者空数组时出现崩溃的bug
+
 ##安装
 Use cocopods:
 ```
-pod "HYBLoopScrollView", '~> 2.2.3'
+pod "HYBLoopScrollView", '~> 2.2.4'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 

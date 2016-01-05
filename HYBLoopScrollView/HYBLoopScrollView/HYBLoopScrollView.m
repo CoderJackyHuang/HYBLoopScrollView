@@ -241,6 +241,18 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)setImageUrls:(NSArray *)imageUrls {
+  if (![imageUrls isKindOfClass:[NSArray class]]) {
+    return;
+  }
+  
+  if (imageUrls == nil || imageUrls.count == 0) {
+    self.collectionView.scrollEnabled = NO;
+    [self pauseTimer];
+    self.totalPageCount = 0;
+    [self.collectionView reloadData];
+    return;
+  }
+  
   if (_imageUrls != imageUrls) {
     _imageUrls = imageUrls;
     
@@ -263,6 +275,10 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)layoutSubviews {
   [super layoutSubviews];
+  
+  if (self.totalPageCount == 0) {
+    return;
+  }
   
   self.collectionView.frame = self.bounds;
   if (self.collectionView.contentOffset.x == 0) {
@@ -324,6 +340,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+  if (self.totalPageCount == 0) {
+    return;
+  }
   if (self.didSelectItemBlock) {
     HYBCollectionCell *cell = (HYBCollectionCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
     self.didSelectItemBlock(indexPath.item % self.imageUrls.count, cell.imageView);
@@ -332,6 +351,10 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+  if (self.totalPageCount == 0) {
+    return;
+  }
+  
   int itemIndex = (scrollView.contentOffset.x +
                    self.collectionView.hyb_width * 0.5) / self.collectionView.hyb_width;
   itemIndex = itemIndex % self.imageUrls.count;
