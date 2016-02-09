@@ -377,7 +377,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [self pauseTimer];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
   [self startTimer];
 }
 
