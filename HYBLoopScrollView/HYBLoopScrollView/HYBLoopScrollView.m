@@ -156,17 +156,14 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     return;
   }
   
-  if (self.timer != nil) {
-    return;
-  }
-  
+  [self.timer invalidate];
+  self.timer = nil;
   self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval
                                                 target:self
                                               selector:@selector(autoScroll)
                                               userInfo:nil
                                                repeats:YES];
-  // 只有在App正常状态下才会回调定时器，在应用滚动scrollview等时，会自动切换模式，也就不会回调定时器
-  [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+  [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)setPageControlEnabled:(BOOL)pageControlEnabled {
@@ -378,7 +375,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-  [self startTimer];
+  [self configTimer];
 }
 
 @end

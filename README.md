@@ -31,10 +31,16 @@ HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoo
 #Version 2.2.4版本
 处理图片数据传nil或者空数组时出现崩溃的bug
 
+#Version 2.2.5版本
+
+fix bugs
+
 ##安装
+
 Use cocopods:
+
 ```
-pod "HYBLoopScrollView", '~> 2.2.4'
+pod "HYBLoopScrollView", '~> 2.2.5'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
