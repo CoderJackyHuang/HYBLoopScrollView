@@ -2,7 +2,7 @@
 App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助。
 
 ##喜讯
-HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
+HYBLoopScrollView升级到3.0版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
 请移步：[http://www.henishuo.com/ios-open-source-hybloopscrollview/](http://www.henishuo.com/ios-open-source-hybloopscrollview/)
 
 
@@ -35,16 +35,24 @@ HYBLoopScrollView升级到2.2版本了，作者的个人博客中有关于HYBLoo
 
 fix bugs
 
+#Version 3.0.0
+
+* 去掉AFNetworking依赖
+* 增加自带图片下载及缓存功能
+* 增加图片自动剪裁功能
+* 简化API
+
 ##安装
 
 Use cocopods:
 
 ```
-pod "HYBLoopScrollView", '~> 2.2.5'
+pod "HYBLoopScrollView", '~> 3.0.0'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
 ##如何使用
+
 简单说明已经放到博客：[http://www.henishuo.com/ios-open-source-hybloopscrollview/](http://www.henishuo.com/ios-open-source-hybloopscrollview/)
 
 
@@ -52,12 +60,6 @@ or you can download the zip file and drag the HYBLoopScrollView folder to your p
 Thanks to github, I learn a lot from friends in github.<br/>
 Thanks to AFNetworking author.<br/>
 If there is any bug, contact me huangyibiao520@163.com.
-
-##关注我
-
-**有问必答QQ群：324400294**<br/>
-**欢迎关注微信号：iOSDevShares**
-![image](https://github.com/CoderJackyHuang/IOSCallJsOrJsCallIOS/blob/master/wx.jpg)
 
 ##Knowledge
 If your app adopts my lib, hope you can send me an email,just make me know who uses it.<br/>
