@@ -33,14 +33,14 @@ typedef NS_ENUM(NSInteger, HYBPageControlAlignment) {
  *
  *  @param atIndex  The index of the clicked item in the loop scroll view
  */
-typedef void (^HYBLoopScrollViewDidSelectItemBlock)(NSInteger atIndex, HYBLoadImageView *sender);
+typedef void (^HYBLoopScrollViewDidSelectItemBlock)(NSInteger atIndex);
 
 /**
  *  Call back method when scroll to an item at index.
  *
  *  @param toIndex The index of page
  */
-typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageView *sender);
+typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex);
 
 /**
  *  This is an really useful image loading control, you can use to load image to an
@@ -76,24 +76,6 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
 @property (nonatomic, assign) HYBPageControlAlignment alignment;
 
 /**
- *  The interval time for the timer call. It means that you can
- *  specify a real time for the interval of ad.
- *
- *  @note The default time interval is 5.0
- */
-@property (nonatomic, assign) NSTimeInterval timeInterval;
-
-/**
- *  The call back method of item clicked
- */
-@property (nonatomic, copy) HYBLoopScrollViewDidSelectItemBlock didSelectItemBlock;
-
-/**
- *  The call back method when scroll to a new item
- */
-@property (nonatomic, copy) HYBLoopScrollViewDidScrollBlock didScrollBlock;
-
-/**
  *  The image urls.It can be absolute urls or main bundle image names, even a real UIImage object.
  */
 @property (nonatomic, strong) NSArray *imageUrls;
@@ -116,6 +98,14 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
 @property (nonatomic, strong) NSArray *adTitles;
 
 /**
+ *	@author 黄仪标
+ *
+ *	是否自动将下载到的图片裁剪为UIImageView的size。默认为NO。
+ *  若设置为YES，则在下载成功后只存储裁剪后的image
+ */
+@property (nonatomic, assign) BOOL shouldAutoClipImageToViewSize;
+
+/**
  *  The only created method for creating an object.
  *
  *  @param frame     The frame for the loop scroll view
@@ -123,7 +113,6 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
  *
  *  @return The HYBLoopScrollView object.
  */
-+ (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls;
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame
                               imageUrls:(NSArray *)imageUrls
                            timeInterval:(NSTimeInterval)timeInterval
@@ -140,5 +129,21 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex, HYBLoadImageV
  *  the timer again when the view appear.
  */
 - (void)startTimer;
+
+/**
+ *	@author 黄仪标
+ *
+ *	清理掉本地缓存
+ */
+- (void)clearImagesCache;
+
+/**
+ *	@author 黄仪标
+ *
+ *	获取图片缓存的占用的总大小（如果有需要计算缓存大小的需求时，可以调用这个API来获取）
+ *
+ *	@return 大小/bytes
+ */
+- (unsigned long long)imagesCacheSize;
 
 @end

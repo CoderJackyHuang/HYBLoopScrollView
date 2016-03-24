@@ -7,6 +7,7 @@
 //
 
 #import "HYBLoopScrollView.h"
+#import <objc/message.h>
 
 NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
@@ -27,6 +28,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   if (self = [super initWithFrame:frame]) {
     self.imageView = [[HYBLoadImageView alloc] init];
     [self addSubview:self.imageView];
+    self.imageView.isCircle = YES;
     
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
@@ -34,6 +36,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.font = [UIFont systemFontOfSize:13];
     [self addSubview:self.titleLabel];
+    self.titleLabel.layer.masksToBounds = YES;
   }
   
   return self;
@@ -53,6 +56,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   HYBPageControl *_pageControl;
 }
 
+@property (nonatomic, copy) HYBLoopScrollViewDidSelectItemBlock didSelectItemBlock;
+@property (nonatomic, copy) HYBLoopScrollViewDidScrollBlock didScrollBlock;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) NSTimer *timer;
@@ -60,6 +65,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 // Record the previous page index, for we need to update to another page when
 // it is clicked at some point.
 @property (nonatomic, assign) NSInteger previousPageIndex;
+@property (nonatomic, assign) NSTimeInterval timeInterval;
 
 @end
 
@@ -67,6 +73,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)dealloc {
   NSLog(@"hybloopscrollview dealloc");
+  [[NSNotificationCenter defaultCenter] removeObserver:[UIApplication sharedApplication]
+                                                  name:UIApplicationDidReceiveMemoryWarningNotification
+                                                object:nil];
 }
 
 - (void)pauseTimer {
@@ -94,14 +103,6 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [super removeFromSuperview];
 }
 
-+ (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {
-  return [self loopScrollViewWithFrame:frame
-                             imageUrls:imageUrls
-                          timeInterval:5.0
-                             didSelect:nil
-                             didScroll:nil];
-}
-
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame
                               imageUrls:(NSArray *)imageUrls
                            timeInterval:(NSTimeInterval)timeInterval
@@ -116,12 +117,16 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   return loopView;
 }
 
-
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     self.timeInterval = 5.0;
     self.alignment = kPageControlAlignCenter;
     [self configCollectionView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:[UIApplication sharedApplication]
+                                             selector:NSSelectorFromString(@"hyb_clearCache")
+                                                 name:UIApplicationDidReceiveMemoryWarningNotification
+                                               object:nil];
   }
   return self;
 }
@@ -311,6 +316,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   
   // 先取消之前的请求
   HYBLoadImageView *preImageView = cell.imageView;
+  preImageView.shouldAutoClipImageToViewSize = self.shouldAutoClipImageToViewSize;
   if ([preImageView isKindOfClass:[HYBLoadImageView class]]) {
     [preImageView cancelRequest];
   }
@@ -340,9 +346,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   if (self.totalPageCount == 0) {
     return;
   }
+  
   if (self.didSelectItemBlock) {
-    HYBCollectionCell *cell = (HYBCollectionCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    self.didSelectItemBlock(indexPath.item % self.imageUrls.count, cell.imageView);
+    self.didSelectItemBlock(indexPath.item % self.imageUrls.count);
   }
 }
 
@@ -365,8 +371,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   CGFloat fIndex = fabs(x) / self.collectionView.hyb_width;
   
   if (self.didScrollBlock && fabs(fIndex - (CGFloat)index) <= 0.00001) {
-    HYBCollectionCell *cell = (HYBCollectionCell *)[self collectionView:self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
-    self.didScrollBlock(itemIndex, cell.imageView);
+    self.didScrollBlock(itemIndex);
   }
 }
 
@@ -376,6 +381,40 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
   [self configTimer];
+}
+
+- (void)clearImagesCache {
+  // 放在了非公开的扩展中，但是方法是存在的
+  if ([[UIApplication sharedApplication] respondsToSelector:NSSelectorFromString(@"hyb_clearDiskCaches")]) {
+    ((void (*)(id, SEL))objc_msgSend)([UIApplication sharedApplication],
+                                      NSSelectorFromString(@"hyb_clearDiskCaches"));
+  }
+}
+
+- (unsigned long long)imagesCacheSize {
+  NSString *directoryPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/HYBLoopScollViewImages"];
+  BOOL isDir = NO;
+  unsigned long long total = 0;
+
+  if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir]) {
+    if (isDir) {
+      NSError *error = nil;
+      NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
+      
+      if (error == nil) {
+        for (NSString *subpath in array) {
+          NSString *path = [directoryPath stringByAppendingPathComponent:subpath];
+          NSDictionary *dict = [[NSFileManager defaultManager] attributesOfItemAtPath:path
+                                                                                error:&error];
+          if (!error) {
+            total += [dict[NSFileSize] unsignedIntegerValue];
+          }
+        }
+      }
+    }
+  }
+  
+  return total;
 }
 
 @end
