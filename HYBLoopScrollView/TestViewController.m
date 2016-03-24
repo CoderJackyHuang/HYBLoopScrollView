@@ -43,7 +43,7 @@
   } didScroll:^(NSInteger toIndex) {
     
   }];
-  loop.shouldAutoClipImageToViewSize = YES;
+  loop.shouldAutoClipImageToViewSize = NO;
   loop.placeholder = [UIImage imageNamed:@"default.png"];
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;

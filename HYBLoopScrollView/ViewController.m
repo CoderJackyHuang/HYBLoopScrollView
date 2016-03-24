@@ -45,11 +45,12 @@
     
   }];
 
-  loop.shouldAutoClipImageToViewSize = YES;
+  loop.shouldAutoClipImageToViewSize = NO;
   loop.placeholder = [UIImage imageNamed:@"default.png"];
   
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;
+  [loop clearImagesCache];
 
   [self.view addSubview:loop];
   
@@ -68,6 +69,7 @@
   imageView.userInteractionEnabled = YES;
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)];
   [imageView addGestureRecognizer:tap];
+  
 }
 
 - (void)onTap {
