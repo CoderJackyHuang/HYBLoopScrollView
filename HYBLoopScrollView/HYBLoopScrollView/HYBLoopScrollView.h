@@ -64,6 +64,13 @@ typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex);
 @property (nonatomic, strong) UIImage *placeholder;
 
 /**
+ *	@author 黄仪标
+ *
+ *	用于指定图片内容的模式，默认为UIViewContentModeScaleAspectFit
+ */
+@property (nonatomic, assign) UIViewContentMode imageContentMode;
+
+/**
  *  Get the page control
  */
 @property (nonatomic, strong, readonly) HYBPageControl *pageControl;

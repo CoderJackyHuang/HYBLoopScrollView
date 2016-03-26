@@ -95,7 +95,7 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
     // 防止重复调用
     self.callbackOnFinished = nil;
   }
-  NSLog(@"%s %@   %p", __FUNCTION__, connection.currentRequest.URL.absoluteString, self);
+//  NSLog(@"%s %@   %p", __FUNCTION__, connection.currentRequest.URL.absoluteString, self);
   
   [self.data setLength:0];
   self.data = nil;
@@ -112,7 +112,7 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
   
   [self.data setLength:0];
   self.data = nil;
-  NSLog(@"%s", __FUNCTION__);
+//  NSLog(@"%s", __FUNCTION__);
 }
 
 @end
@@ -120,10 +120,27 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
 @interface NSString (md5)
 
 + (NSString *)hyb_md5:(NSString *)string;
++ (NSString *)hyb_cachePath;
++ (NSString *)hyb_keyForRequest:(NSURLRequest *)request;
 
 @end
 
 @implementation NSString (md5)
+
++ (NSString *)hyb_keyForRequest:(NSURLRequest *)request {
+  BOOL portait = NO;
+  if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+    portait = YES;
+  }
+  
+  return [NSString stringWithFormat:@"%@%@",
+          request.URL.absoluteString,
+          portait ? @"portait" : @"lanscape"];
+}
+
++ (NSString *)hyb_cachePath {
+  return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/HYBLoopScollViewImages"];
+}
 
 + (NSString *)hyb_md5:(NSString *)string {
   if (string == nil || [string length] == 0) {
@@ -160,7 +177,7 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
     return nil;
   }
   
-  return [self objectForKey:[NSString hyb_md5:request.URL.absoluteString]];
+  return [self objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
 }
 
 - (BOOL)cacheImage:(UIImage *)image forUrl:(NSString *)url {
@@ -174,7 +191,7 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
 
 - (BOOL)cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request {
   if (request) {
-    NSString *url = [NSString hyb_md5:request.URL.absoluteString];
+    NSString *url = [NSString hyb_md5:[NSString hyb_keyForRequest:request]];
     return [self cacheImage:image forUrl:url];
   }
   
@@ -205,7 +222,7 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
 }
 
 - (void)hyb_clearDiskCaches {
-  NSString *directoryPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/HYBLoopScollViewImages"];
+  NSString *directoryPath = [NSString hyb_cachePath];
   
   if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:nil]) {
     NSError *error = nil;
@@ -222,7 +239,7 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
 }
 
 - (UIImage *)hyb_cacheImageForRequest:(NSURLRequest *)request {
-  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:request.URL.absoluteString]];
+  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
   if (cache) {
     return [cache cacheImageForRequest:request];
   }
@@ -231,7 +248,7 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
 }
 
 - (NSUInteger)hyb_failTimesForRequest:(NSURLRequest *)request {
-  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:request.URL.absoluteString]];
+  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
   
   if (cache) {
     return cache.failTimes;
@@ -241,17 +258,17 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
 }
 
 - (void)hyb_cacheFailRequest:(NSURLRequest *)request {
-  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:request.URL.absoluteString]];
+  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
   if (!cache) {
     cache = [[HYBImageCache alloc] init];
   }
   
   cache.failTimes += 1;
-  [self.hyb_cacheImages setObject:cache forKey:[NSString hyb_md5:request.URL.absoluteString]];
+  [self.hyb_cacheImages setObject:cache forKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
 }
 
 - (void)hyb_cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request {
-    [self hyb_cacheImage:image forKey:[NSString hyb_md5:request.URL.absoluteString]];
+    [self hyb_cacheImage:image forKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
   [self hyb_cacheToDiskForData:UIImagePNGRepresentation(image) request:request];
 }
 
@@ -272,7 +289,7 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
     caches = [[NSMutableDictionary alloc] init];
     
     // Try to get datas from disk
-    NSString *directoryPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/HYBLoopScollViewImages"];
+    NSString *directoryPath = [NSString hyb_cachePath];
     BOOL isDir = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir]) {
       if (isDir) {
@@ -306,7 +323,7 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
     return;
   }
   
-  NSString *directoryPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/HYBLoopScollViewImages"];
+  NSString *directoryPath = [NSString hyb_cachePath];
   
   if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:nil]) {
     NSError *error = nil;
@@ -322,12 +339,12 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
   
   NSString *path = [NSString stringWithFormat:@"%@/%@",
                     directoryPath,
-                    [NSString hyb_md5:request.URL.absoluteString]];
+                    [NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
   BOOL isOk = [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
   if (isOk) {
-    NSLog(@"cache file ok for request: %@", [NSString hyb_md5:request.URL.absoluteString]);
+    NSLog(@"cache file ok for request: %@", [NSString hyb_md5:[NSString hyb_keyForRequest:request]]);
   } else {
-    NSLog(@"cache file error for request: %@", [NSString hyb_md5:request.URL.absoluteString]);
+    NSLog(@"cache file error for request: %@", [NSString hyb_md5:[NSString hyb_keyForRequest:request]]);
   }
 }
 

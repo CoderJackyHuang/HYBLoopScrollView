@@ -1,15 +1,11 @@
 # HYBLoopScrollView
 App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助。
 
-##喜讯
-HYBLoopScrollView升级到3.0版本了，作者的个人博客中有关于HYBLoopScrollView如何使用等教程，
-请移步：[http://www.henishuo.com/ios-open-source-hybloopscrollview/](http://www.henishuo.com/ios-open-source-hybloopscrollview/)
+#效果图
 
-
-##效果图
 ![image](https://github.com/632840804/HYBLoopScrollView/blob/master/screen.gif)
 
-##发生了什么变化
+#发生了什么变化
 追加了常用的UIView扩展，简化了API的调用。
 最重要的是，fix了朋友们反馈的bug，优化了大图加载时，快速滚动的效果
 
@@ -41,6 +37,17 @@ fix bugs
 * 增加自带图片下载及缓存功能
 * 增加图片自动剪裁功能
 * 简化API
+
+#Version 3.1.0
+
+很多朋友反馈说如果能支持横屏就更好了。本版本增加了这个需求。
+
+* 增加横屏支持，且对于数据缓存增加模屏、竖屏图片裁剪缓存
+* 增加图片缩放设置，外部可以通过imageContentMode设置
+* 增加支持自动布局,内置masonry自动布局例子。支持横屏、竖屏
+
+
+
 
 ##安装
 

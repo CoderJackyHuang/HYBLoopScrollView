@@ -122,6 +122,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     self.timeInterval = 5.0;
     self.alignment = kPageControlAlignCenter;
     [self configCollectionView];
+    self.imageContentMode = UIViewContentModeScaleAspectFit;
     
     [[NSNotificationCenter defaultCenter] addObserver:[UIApplication sharedApplication]
                                              selector:NSSelectorFromString(@"hyb_clearCache")
@@ -271,6 +272,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
       [self configPageControl];
       self.collectionView.scrollEnabled = NO;
     }
+    
     [self.collectionView reloadData];
   }
 }
@@ -282,14 +284,14 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     return;
   }
   
+  self.layout.itemSize = self.hyb_size;
+  
   self.collectionView.frame = self.bounds;
-  if (self.collectionView.contentOffset.x == 0) {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.totalPageCount * 0.5
-                                                 inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:indexPath
-                                atScrollPosition:UICollectionViewScrollPositionNone
-                                        animated:NO];
-  }
+  NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.totalPageCount * 0.5
+                                               inSection:0];
+  [self.collectionView scrollToItemAtIndexPath:indexPath
+                              atScrollPosition:UICollectionViewScrollPositionNone
+                                      animated:NO];
   
   [self configPageControl];
 }
@@ -316,7 +318,9 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   
   // 先取消之前的请求
   HYBLoadImageView *preImageView = cell.imageView;
+  cell.imageView.contentMode = self.imageContentMode;
   preImageView.shouldAutoClipImageToViewSize = self.shouldAutoClipImageToViewSize;
+  
   if ([preImageView isKindOfClass:[HYBLoadImageView class]]) {
     [preImageView cancelRequest];
   }
@@ -395,7 +399,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   NSString *directoryPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/HYBLoopScollViewImages"];
   BOOL isDir = NO;
   unsigned long long total = 0;
-
+  
   if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir]) {
     if (isDir) {
       NSError *error = nil;

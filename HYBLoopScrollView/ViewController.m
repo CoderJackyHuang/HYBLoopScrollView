@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HYBLoopScrollView.h"
 #import "TestViewController.h"
+#import "Masonry.h"
 
 @interface ViewController ()
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.view.backgroundColor = [UIColor lightGrayColor];
   // 这个图片会找不到，而显示默认图
   NSString *url = @"http://test.meirongzongjian.com/imageServer/user/3/42ccb9c75ccf5e910cd6f5aaf0cd1200.jpg";
   NSArray *images = @[@"http://s0.pimg.cn/group5/M00/5B/6D/wKgBfVaQf0KAMa2vAARnyn5qdf8958.jpg?imageMogr2/strip/thumbnail/1200%3E/quality/95",
@@ -50,9 +52,22 @@
   
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;
-  [loop clearImagesCache];
 
   [self.view addSubview:loop];
+[loop mas_makeConstraints:^(MASConstraintMaker *make) {
+  make.left.right.mas_equalTo(0);
+  make.height.mas_equalTo(120);
+  make.top.mas_equalTo(0);
+}];
+  
+  // 不希望显示pagecontrol？
+//  loop.pageControl.hidden = YES;
+  // 或者直接
+//  [loop.pageControl removeFromSuperview];
+  
+  // 默认的是UIViewContentModeScaleAspectFit
+//  loop.imageContentMode = UIViewContentModeScaleToFill;
+  loop.imageContentMode = UIViewContentModeScaleAspectFill;
   
   NSLog(@"size: %llu", [loop imagesCacheSize]);
   [loop clearImagesCache];
