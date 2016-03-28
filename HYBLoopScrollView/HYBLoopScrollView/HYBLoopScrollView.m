@@ -60,7 +60,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 @property (nonatomic, copy) HYBLoopScrollViewDidScrollBlock didScrollBlock;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) CFRunLoopTimerRef timer;
 @property (nonatomic, assign) NSInteger totalPageCount;
 // Record the previous page index, for we need to update to another page when
 // it is clicked at some point.
@@ -72,7 +72,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 @implementation HYBLoopScrollView
 
 - (void)dealloc {
-  NSLog(@"hybloopscrollview dealloc");
+//  NSLog(@"hybloopscrollview dealloc");
   [[NSNotificationCenter defaultCenter] removeObserver:[UIApplication sharedApplication]
                                                   name:UIApplicationDidReceiveMemoryWarningNotification
                                                 object:nil];
@@ -80,16 +80,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)pauseTimer {
   if (self.timer) {
-    [self.timer setFireDate:[NSDate distantFuture]];
+    CFRunLoopTimerInvalidate(self.timer);
+    CFRunLoopRemoveTimer(CFRunLoopGetCurrent(), self.timer, kCFRunLoopCommonModes);
   }
 }
 
 - (void)startTimer {
-  if (self.timer) {
-    [self.timer performSelector:@selector(setFireDate:)
-                     withObject:[NSDate distantPast]
-                     afterDelay:self.timeInterval];
-  }
+    [self configTimer];
 }
 
 - (HYBPageControl *)pageControl {
@@ -97,8 +94,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)removeFromSuperview {
-  [self.timer invalidate];
-  self.timer = nil;
+  [self pauseTimer];
   
   [super removeFromSuperview];
 }
@@ -139,11 +135,11 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)configCollectionView {
-  self.layout = [[UICollectionViewFlowLayout alloc] init];
-  self.layout .itemSize = self.bounds.size;
-  self.layout .minimumLineSpacing = 0;
-  self.layout .scrollDirection = UICollectionViewScrollDirectionHorizontal;
-  
+        self.layout = [[UICollectionViewFlowLayout alloc] init];
+      self.layout .itemSize = self.bounds.size;
+      self.layout .minimumLineSpacing = 0;
+      self.layout .scrollDirection = UICollectionViewScrollDirectionHorizontal;
+
   self.collectionView = [[UICollectionView alloc] initWithFrame:self.frame
                                            collectionViewLayout:self.layout];
   self.collectionView.backgroundColor = [UIColor lightGrayColor];
@@ -162,14 +158,18 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     return;
   }
   
-  [self.timer invalidate];
-  self.timer = nil;
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval
-                                                target:self
-                                              selector:@selector(autoScroll)
-                                              userInfo:nil
-                                               repeats:YES];
-  [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+  if (self.timer) {
+    CFRunLoopTimerInvalidate(self.timer);
+    CFRunLoopRemoveTimer(CFRunLoopGetCurrent(), self.timer, kCFRunLoopCommonModes);
+  }
+
+  __weak __typeof(self) weakSelf = self;
+  CFRunLoopTimerRef timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent() + _timeInterval, _timeInterval, 0, 0, ^(CFRunLoopTimerRef timer) {
+    [weakSelf autoScroll];
+  });
+  
+  self.timer = timer;
+  CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
 }
 
 - (void)setPageControlEnabled:(BOOL)pageControlEnabled {
@@ -241,6 +241,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [self.collectionView scrollToItemAtIndexPath:indexPath
                               atScrollPosition:UICollectionViewScrollPositionNone
                                       animated:YES];
+
 }
 
 - (void)setImageUrls:(NSArray *)imageUrls {
@@ -284,8 +285,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     return;
   }
   
-  self.layout.itemSize = self.hyb_size;
-  
+    self.layout.itemSize = self.hyb_size;
+
   self.collectionView.frame = self.bounds;
   NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.totalPageCount * 0.5
                                                inSection:0];
@@ -384,7 +385,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-  [self configTimer];
+  [self startTimer];
 }
 
 - (void)clearImagesCache {

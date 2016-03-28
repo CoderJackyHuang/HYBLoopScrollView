@@ -13,6 +13,8 @@
 
 @interface ViewController ()
 
+@property (nonatomic, weak) HYBLoopScrollView *loop;
+
 @end
 
 @implementation ViewController
@@ -59,6 +61,7 @@
   make.height.mas_equalTo(120);
   make.top.mas_equalTo(0);
 }];
+  self.loop = loop;
   
   // 不希望显示pagecontrol？
 //  loop.pageControl.hidden = YES;
@@ -85,6 +88,18 @@
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)];
   [imageView addGestureRecognizer:tap];
   
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
+  [self.loop startTimer];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+  
+  [self.loop pauseTimer];
 }
 
 - (void)onTap {

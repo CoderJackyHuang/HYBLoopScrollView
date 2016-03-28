@@ -42,6 +42,11 @@ typedef void (^HYBLoopScrollViewDidSelectItemBlock)(NSInteger atIndex);
  */
 typedef void (^HYBLoopScrollViewDidScrollBlock)(NSInteger toIndex);
 
+typedef NS_ENUM(NSUInteger, HYBFlowLayoutType) {
+  kHYBFlowLayoutTypeDefault,
+  kHYBFlowLayoutTypeScaleHorizontal
+};
+
 /**
  *  This is an really useful image loading control, you can use to load image to an
  *  UImageView control, with it, will be more convenience to globally download image

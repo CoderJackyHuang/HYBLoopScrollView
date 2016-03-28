@@ -38,7 +38,7 @@
   
   // 请使用weakSelf，不然内存得不到释放
   __weak __typeof(self) weakSelf = self;
-  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images timeInterval:5 didSelect:^(NSInteger atIndex) {
+  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images timeInterval:5  didSelect:^(NSInteger atIndex) {
    [weakSelf dismissViewControllerAnimated:YES completion:NULL];
   } didScroll:^(NSInteger toIndex) {
     
@@ -47,6 +47,7 @@
   loop.placeholder = [UIImage imageNamed:@"default.png"];
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;
+  [loop pauseTimer];
   
   [self.view addSubview:loop];
 }
