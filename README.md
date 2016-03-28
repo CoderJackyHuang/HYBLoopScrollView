@@ -46,7 +46,9 @@ fix bugs
 * 增加图片缩放设置，外部可以通过imageContentMode设置
 * 增加支持自动布局,内置masonry自动布局例子。支持横屏、竖屏
 
+#Version 3.1.1
 
+* 处理timer暂停不起作用bug
 
 
 ##安装
@@ -54,7 +56,7 @@ fix bugs
 Use cocopods:
 
 ```
-pod "HYBLoopScrollView", '~> 3.0.0'
+pod "HYBLoopScrollView", '~> 3.1.1'
 ```
 or you can download the zip file and drag the HYBLoopScrollView folder to your project.
 
@@ -64,11 +66,13 @@ or you can download the zip file and drag the HYBLoopScrollView folder to your p
 
 
 ##致谢
+
 Thanks to github, I learn a lot from friends in github.<br/>
 Thanks to AFNetworking author.<br/>
 If there is any bug, contact me huangyibiao520@163.com.
 
 ##Knowledge
+
 If your app adopts my lib, hope you can send me an email,just make me know who uses it.<br/>
 
 Thanks in advance!!!
