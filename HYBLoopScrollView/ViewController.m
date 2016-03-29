@@ -10,6 +10,7 @@
 #import "HYBLoopScrollView.h"
 #import "TestViewController.h"
 #import "Masonry.h"
+#import "HYBPageControl.h"
 
 @interface ViewController ()
 
@@ -43,7 +44,7 @@
                       @"微博：weibo.com/huangyibiao520"
                       ];
   
-  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images timeInterval:5 didSelect:^(NSInteger atIndex) {
+  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images timeInterval:10 didSelect:^(NSInteger atIndex) {
     
   } didScroll:^(NSInteger toIndex) {
     
@@ -87,7 +88,6 @@
   imageView.userInteractionEnabled = YES;
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)];
   [imageView addGestureRecognizer:tap];
-  
 }
 
 - (void)viewDidAppear:(BOOL)animated {

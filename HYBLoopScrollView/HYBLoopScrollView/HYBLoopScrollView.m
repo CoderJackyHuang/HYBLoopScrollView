@@ -72,7 +72,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 @implementation HYBLoopScrollView
 
 - (void)dealloc {
-//  NSLog(@"hybloopscrollview dealloc");
+  //  NSLog(@"hybloopscrollview dealloc");
   [[NSNotificationCenter defaultCenter] removeObserver:[UIApplication sharedApplication]
                                                   name:UIApplicationDidReceiveMemoryWarningNotification
                                                 object:nil];
@@ -86,7 +86,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)startTimer {
-    [self configTimer];
+  [self configTimer];
 }
 
 - (HYBPageControl *)pageControl {
@@ -135,11 +135,11 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)configCollectionView {
-        self.layout = [[UICollectionViewFlowLayout alloc] init];
-      self.layout .itemSize = self.bounds.size;
-      self.layout .minimumLineSpacing = 0;
-      self.layout .scrollDirection = UICollectionViewScrollDirectionHorizontal;
-
+  self.layout = [[UICollectionViewFlowLayout alloc] init];
+  self.layout .itemSize = self.bounds.size;
+  self.layout .minimumLineSpacing = 0;
+  self.layout .scrollDirection = UICollectionViewScrollDirectionHorizontal;
+  
   self.collectionView = [[UICollectionView alloc] initWithFrame:self.frame
                                            collectionViewLayout:self.layout];
   self.collectionView.backgroundColor = [UIColor lightGrayColor];
@@ -162,7 +162,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     CFRunLoopTimerInvalidate(self.timer);
     CFRunLoopRemoveTimer(CFRunLoopGetCurrent(), self.timer, kCFRunLoopCommonModes);
   }
-
+  
   __weak __typeof(self) weakSelf = self;
   CFRunLoopTimerRef timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent() + _timeInterval, _timeInterval, 0, 0, ^(CFRunLoopTimerRef timer) {
     [weakSelf autoScroll];
@@ -179,13 +179,34 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     if (_pageControlEnabled) {
       __weak __typeof(self) weakSelf = self;
       self.pageControl.valueChangedBlock = ^(NSInteger clickedAtIndex) {
-        NSInteger curIndex = (weakSelf.collectionView.contentOffset.x
-                              + weakSelf.layout.itemSize.width * 0.5) / weakSelf.layout.itemSize.width;
-        NSInteger toIndex = curIndex + (clickedAtIndex > weakSelf.previousPageIndex ? clickedAtIndex : -clickedAtIndex);
-        [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionNone
-                                                animated:YES];
+        // 往左
+        NSInteger count = clickedAtIndex - weakSelf.pageControl.currentPage;
+
+        NSInteger toIndex = count + self.previousPageIndex;
+        NSIndexPath *indexPath = nil;
+        if (toIndex == weakSelf.totalPageCount) {
+          toIndex = weakSelf.totalPageCount * 0.5;
+          
+          // scroll to the middle without animation, and scroll to middle with animation, so that it scrolls
+          // more smoothly.
+          indexPath = [NSIndexPath indexPathForItem:toIndex inSection:0];
+          [weakSelf.collectionView scrollToItemAtIndexPath:indexPath
+                                      atScrollPosition:UICollectionViewScrollPositionNone
+                                              animated:NO];
+        } else {
+          indexPath = [NSIndexPath indexPathForItem:count > 0 ? toIndex - 1 : toIndex + 1 inSection:0];
+          [weakSelf.collectionView scrollToItemAtIndexPath:indexPath
+                                          atScrollPosition:UICollectionViewScrollPositionNone
+                                                  animated:NO];
+
+          indexPath = [NSIndexPath indexPathForItem:toIndex inSection:0];
+        }
         
+        [weakSelf.collectionView scrollToItemAtIndexPath:indexPath
+                                    atScrollPosition:UICollectionViewScrollPositionNone
+                                            animated:YES];
+        
+        [weakSelf.pageControl updateCurrentPageDisplay];
       };
     } else {
       self.pageControl.valueChangedBlock = nil;
@@ -203,13 +224,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   
   [self bringSubviewToFront:self.pageControl];
   self.pageControl.numberOfPages = self.imageUrls.count;
-  CGSize size = [self.pageControl sizeForNumberOfPages:self.imageUrls.count];
+  CGSize size = [self.pageControl sizeForNumberOfPages:self.imageUrls.count + 2];
   self.pageControl.hyb_size = size;
   
   if (self.alignment == kPageControlAlignCenter) {
     self.pageControl.hyb_originX = (self.hyb_width - self.pageControl.hyb_width) / 2.0;
   } else if (self.alignment == kPageControlAlignRight) {
-    self.pageControl.hyb_rightX = self.hyb_width - 10;
+    self.pageControl.hyb_rightX = self.hyb_width;
   }
   self.pageControl.hyb_originY = self.hyb_height - self.pageControl.hyb_height + 5;
 }
@@ -241,7 +262,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   [self.collectionView scrollToItemAtIndexPath:indexPath
                               atScrollPosition:UICollectionViewScrollPositionNone
                                       animated:YES];
-
+  
 }
 
 - (void)setImageUrls:(NSArray *)imageUrls {
@@ -285,8 +306,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     return;
   }
   
-    self.layout.itemSize = self.hyb_size;
-
+  self.layout.itemSize = self.hyb_size;
+  
   self.collectionView.frame = self.bounds;
   NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.totalPageCount * 0.5
                                                inSection:0];

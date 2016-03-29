@@ -12,19 +12,24 @@
 
 - (instancetype)init {
   if (self = [super init]) {
-    // To Do:
-    // set any default properties here
-    [self addTarget:self
-             action:@selector(onPageControlValueChanged:)
-   forControlEvents:UIControlEventValueChanged];
+    self.defersCurrentPageDisplay = YES;
   }
   
   return self;
 }
 
-- (void)onPageControlValueChanged:(HYBPageControl *)sender {
-  if (self.valueChangedBlock) {
-    self.valueChangedBlock(sender.currentPage);
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  UITouch *touch = [touches anyObject];
+CGPoint p =    [touch locationInView:self];
+  
+  CGFloat px = p.x;
+  CGFloat pw = self.frame.size.width / self.numberOfPages;
+  NSInteger index = px / pw;
+  
+  if (self.valueChangedBlock && index != self.currentPage) {
+    self.valueChangedBlock(index);
+  } else {
+    [self updateCurrentPageDisplay];
   }
 }
 
