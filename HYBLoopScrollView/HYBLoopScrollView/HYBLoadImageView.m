@@ -460,7 +460,7 @@ static char *s_hyb_cacheFaileTimesKeys = "hyb_cacheFaileTimesKeys";
             // 剪裁
             if (fabs(weakSelf.frame.size.width - image.size.width) != 0
                 && fabs(weakSelf.frame.size.height - image.size.height) != 0) {
-              finalImage = [HYBLoadImageView clipImage:image toSize:weakSelf.frame.size isScaleToMax:NO];
+              finalImage = [HYBLoadImageView clipImage:image toSize:weakSelf.frame.size isScaleToMax:YES];
             }
           }
           
