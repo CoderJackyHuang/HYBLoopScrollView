@@ -93,6 +93,12 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   return _pageControl;
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+  [super setBackgroundColor:backgroundColor];
+  
+  self.collectionView.backgroundColor = backgroundColor;
+}
+
 - (void)removeFromSuperview {
   [self pauseTimer];
   

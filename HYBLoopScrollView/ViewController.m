@@ -50,6 +50,7 @@
     
   }];
 
+  loop.backgroundColor = [UIColor whiteColor];
   loop.shouldAutoClipImageToViewSize = NO;
   loop.placeholder = [UIImage imageNamed:@"default.png"];
   
@@ -63,6 +64,7 @@
   make.top.mas_equalTo(0);
 }];
   self.loop = loop;
+  loop.pageControl.currentPageIndicatorTintColor = [UIColor purpleColor];
   
   // 不希望显示pagecontrol？
 //  loop.pageControl.hidden = YES;

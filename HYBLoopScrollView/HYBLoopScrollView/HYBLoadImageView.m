@@ -12,6 +12,9 @@
 #import <objc/runtime.h>
 #import <CommonCrypto/CommonDigest.h>
 
+// 内部调试用
+//#define kDebugLog
+
 typedef void (^HYBDownLoadDataCallBack)(NSData *data, NSError *error);
 typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long long current);
 
@@ -95,7 +98,7 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
     // 防止重复调用
     self.callbackOnFinished = nil;
   }
-//  NSLog(@"%s %@   %p", __FUNCTION__, connection.currentRequest.URL.absoluteString, self);
+  //  NSLog(@"%s %@   %p", __FUNCTION__, connection.currentRequest.URL.absoluteString, self);
   
   [self.data setLength:0];
   self.data = nil;
@@ -112,7 +115,7 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
   
   [self.data setLength:0];
   self.data = nil;
-//  NSLog(@"%s", __FUNCTION__);
+  //  NSLog(@"%s", __FUNCTION__);
 }
 
 @end
@@ -160,49 +163,9 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
 
 @end
 
-@interface HYBImageCache : NSCache
-
-@property (nonatomic, assign) NSUInteger failTimes;
-
-- (BOOL)cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request;
-- (BOOL)cacheImage:(UIImage *)image forUrl:(NSString *)url;
-- (UIImage *)cacheImageForRequest:(NSURLRequest *)request;
-
-@end
-
-@implementation HYBImageCache
-
-- (UIImage *)cacheImageForRequest:(NSURLRequest *)request {
-  if (request == nil || ![request isKindOfClass:[NSURLRequest class]]) {
-    return nil;
-  }
-  
-  return [self objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
-}
-
-- (BOOL)cacheImage:(UIImage *)image forUrl:(NSString *)url {
-  if (image != nil && ![image isKindOfClass:[NSNull class]]) {
-    [self setObject:image forKey:url];
-    return YES;
-  }
-  
-  return NO;
-}
-
-- (BOOL)cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request {
-  if (request) {
-    NSString *url = [NSString hyb_md5:[NSString hyb_keyForRequest:request]];
-    return [self cacheImage:image forUrl:url];
-  }
-  
-  return NO;
-}
-
-@end
-
 @interface UIApplication (HYBCacheImage)
 
-@property (nonatomic, strong, readonly) NSMutableDictionary *hyb_cacheImages;
+@property (nonatomic, strong, readonly) NSMutableDictionary *hyb_cacheFaileTimes;
 
 - (UIImage *)hyb_cacheImageForRequest:(NSURLRequest *)request;
 - (void)hyb_cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request;
@@ -211,14 +174,25 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
 
 @end
 
-static char *s_hyb_cacheimages = "s_hyb_cacheimages";
+static char *s_hyb_cacheFaileTimesKeys = "hyb_cacheFaileTimesKeys";
 
 @implementation UIApplication (HYBCacheImage)
 
-- (void)hyb_clearCache {
-  [self.hyb_cacheImages removeAllObjects];
+- (NSMutableDictionary *)hyb_cacheFaileTimes {
+  NSMutableDictionary *dict = objc_getAssociatedObject(self, s_hyb_cacheFaileTimesKeys);
   
-  objc_setAssociatedObject(self, s_hyb_cacheimages, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  if (!dict) {
+    dict = [[NSMutableDictionary alloc] init];
+    objc_setAssociatedObject(self, s_hyb_cacheFaileTimesKeys, dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  }
+  
+  return dict;
+}
+
+- (void)hyb_clearCache {
+  [self.hyb_cacheFaileTimes removeAllObjects];
+  
+  objc_setAssociatedObject(self, s_hyb_cacheFaileTimesKeys, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)hyb_clearDiskCaches {
@@ -228,98 +202,54 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
     NSError *error = nil;
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:&error];
     
+#ifdef kDebugLog
     if (error) {
       NSLog(@"clear caches error: %@", error);
     } else {
       NSLog(@"clear caches ok");
     }
+#endif
   }
   
   [self hyb_clearCache];
 }
 
 - (UIImage *)hyb_cacheImageForRequest:(NSURLRequest *)request {
-  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
-  if (cache) {
-    return [cache cacheImageForRequest:request];
+  if (request) {
+    NSString *directoryPath = [NSString hyb_cachePath];
+    NSString *path = [NSString stringWithFormat:@"%@/%@",
+                      directoryPath,
+                      [NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
+    return [UIImage imageWithContentsOfFile:path];
   }
   
   return nil;
 }
 
 - (NSUInteger)hyb_failTimesForRequest:(NSURLRequest *)request {
-  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
+  NSNumber *faileTimes = [self.hyb_cacheFaileTimes objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
   
-  if (cache) {
-    return cache.failTimes;
+  if (faileTimes && [faileTimes respondsToSelector:@selector(integerValue)]) {
+    return faileTimes.integerValue;
   }
   
   return 0;
 }
 
 - (void)hyb_cacheFailRequest:(NSURLRequest *)request {
-  HYBImageCache *cache = [self.hyb_cacheImages objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
-  if (!cache) {
-    cache = [[HYBImageCache alloc] init];
+  NSNumber *faileTimes = [self.hyb_cacheFaileTimes objectForKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
+  NSUInteger times = 0;
+  if (faileTimes && [faileTimes respondsToSelector:@selector(integerValue)]) {
+    times = [faileTimes integerValue];
   }
   
-  cache.failTimes += 1;
-  [self.hyb_cacheImages setObject:cache forKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
+  times++;
+  
+  [self.hyb_cacheFaileTimes setObject:@(times) forKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
 }
 
 - (void)hyb_cacheImage:(UIImage *)image forRequest:(NSURLRequest *)request {
-    [self hyb_cacheImage:image forKey:[NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
-  [self hyb_cacheToDiskForData:UIImagePNGRepresentation(image) request:request];
-}
-
-- (void)hyb_cacheImage:(UIImage *)image forKey:(NSString *)key {
-  if (self.hyb_cacheImages[key]) {
-    return;
-  }
-  
-  HYBImageCache *cache = [[HYBImageCache alloc] init];
-  [cache cacheImage:image forUrl:key];
-  [self.hyb_cacheImages setObject:cache forKey:key];
-}
-
-- (NSMutableDictionary *)hyb_cacheImages {
-  NSMutableDictionary *caches = objc_getAssociatedObject(self, s_hyb_cacheimages);
-  
-  if (caches == nil) {
-    caches = [[NSMutableDictionary alloc] init];
-    
-    // Try to get datas from disk
-    NSString *directoryPath = [NSString hyb_cachePath];
-    BOOL isDir = NO;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir]) {
-      if (isDir) {
-        NSError *error = nil;
-        NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directoryPath error:&error];
-
-        if (error == nil) {
-          for (NSString *subpath in array) {
-            NSData *data = [[NSFileManager defaultManager] contentsAtPath:[directoryPath stringByAppendingPathComponent:subpath]];
-            if (data) {
-              UIImage *image = [UIImage imageWithData:data];
-              if (image) {
-                HYBImageCache *cache = [[HYBImageCache alloc] init];
-                [cache cacheImage:image forUrl:subpath];
-                [caches setObject:cache forKey:subpath];
-              }
-            }
-          }
-        }
-      }
-    }
-    
-    objc_setAssociatedObject(self, s_hyb_cacheimages, caches, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-  }
-  
-  return caches;
-}
-
-- (void)hyb_cacheToDiskForData:(NSData *)data request:(NSURLRequest *)request {
-  if (data == nil || request == nil) {
+  if (image == nil || request == nil) {
     return;
   }
   
@@ -332,7 +262,9 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
                                                attributes:nil
                                                     error:&error];
     if (error) {
+#ifdef kDebugLog
       NSLog(@"create cache dir error: %@", error);
+#endif
       return;
     }
   }
@@ -340,17 +272,24 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
   NSString *path = [NSString stringWithFormat:@"%@/%@",
                     directoryPath,
                     [NSString hyb_md5:[NSString hyb_keyForRequest:request]]];
-  BOOL isOk = [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
-  if (isOk) {
-    NSLog(@"cache file ok for request: %@", [NSString hyb_md5:[NSString hyb_keyForRequest:request]]);
-  } else {
-    NSLog(@"cache file error for request: %@", [NSString hyb_md5:[NSString hyb_keyForRequest:request]]);
+  NSData *data = UIImagePNGRepresentation(image);
+  if (data) {
+    BOOL isOk = [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
+    
+    if (isOk) {
+#ifdef kDebugLog
+      NSLog(@"cache file ok for request: %@", [NSString hyb_md5:[NSString hyb_keyForRequest:request]]);
+#endif
+    } else {
+#ifdef kDebugLog
+      NSLog(@"cache file error for request: %@", [NSString hyb_md5:[NSString hyb_keyForRequest:request]]);
+#endif
+    }
   }
 }
 
 @end
 
-#define kImageWithName(Name) ([UIImage imageNamed:Name])
 #define kAnimationDuration 1.0
 
 @interface HYBLoadImageView () {
@@ -557,7 +496,13 @@ static char *s_hyb_cacheimages = "s_hyb_cacheimages";
 - (void)setImageWithURLString:(NSString *)url
              placeholderImage:(NSString *)placeholderImage
                    completion:(void (^)(UIImage *image))completion {
-  [self setImageWithURLString:url placeholder:kImageWithName(placeholderImage) completion:completion];
+  NSString *path = [[NSBundle mainBundle] pathForResource:placeholderImage ofType:nil];
+  UIImage *image = [UIImage imageWithContentsOfFile:path];
+  if (image == nil) {
+    image = [UIImage imageNamed:placeholderImage];
+  }
+  
+  [self setImageWithURLString:url placeholder:image completion:completion];
 }
 
 - (void)cancelRequest {
