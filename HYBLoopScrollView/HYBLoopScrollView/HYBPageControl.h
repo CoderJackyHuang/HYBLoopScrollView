@@ -29,6 +29,9 @@
  */
 typedef void (^HYBPageControlValueChangedBlock)(NSInteger clickAtIndex);
 
+// 若>0，则重写小圆点的大小
+@property (nonatomic, assign) CGFloat size;
+
 /**
  *  It is not required. If you don't want to handle it, just ignore.
  */

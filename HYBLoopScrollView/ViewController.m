@@ -43,8 +43,11 @@
                       @"github: https://coderJackyHuang",
                       @"微博：weibo.com/huangyibiao520"
                       ];
-  
-  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images timeInterval:10 didSelect:^(NSInteger atIndex) {
+
+  // 当有导航条时，若距离上面不点满，或者被挡一部分，请一定要设置这一行，因为7.0之后self.view的起点坐标从
+  // 状态栏开始的。
+  self.edgesForExtendedLayout = UIRectEdgeNone;
+  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 0, 320, 120) imageUrls:images timeInterval:10 didSelect:^(NSInteger atIndex) {
     
   } didScroll:^(NSInteger toIndex) {
     
@@ -64,7 +67,10 @@
   make.top.mas_equalTo(0);
 }];
   self.loop = loop;
+
   loop.pageControl.currentPageIndicatorTintColor = [UIColor purpleColor];
+// page control小圆点太小？可以修改的
+  loop.pageControl.size = 10;
   
   // 不希望显示pagecontrol？
 //  loop.pageControl.hidden = YES;
@@ -107,7 +113,7 @@
 - (void)onTap {
 // 测试内存是否得到释放
   TestViewController *vc = [[TestViewController alloc] init];
-  [self presentViewController:vc animated:YES completion:NULL];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 

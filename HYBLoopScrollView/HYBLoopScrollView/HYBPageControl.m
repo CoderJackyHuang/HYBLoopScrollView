@@ -33,4 +33,21 @@ CGPoint p =    [touch locationInView:self];
   }
 }
 
+- (void)setCurrentPage:(NSInteger)page {
+  [super setCurrentPage:page];
+  
+  if (self.size > 0) {
+    for (NSUInteger subviewIndex = 0; subviewIndex < [self.subviews count]; subviewIndex++) {
+      UIImageView* subview = (UIImageView *)[self.subviews objectAtIndex:subviewIndex];
+      CGSize size;
+      size.height = self.size;
+      size.width = self.size;
+      [subview setFrame:CGRectMake(subview.frame.origin.x, subview.frame.origin.y,
+                                   size.width,size.height)];
+      subview.clipsToBounds = YES;
+      subview.layer.cornerRadius = size.width/2;
+    }
+  }
+}
+
 @end

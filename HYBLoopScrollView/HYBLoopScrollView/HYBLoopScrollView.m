@@ -124,7 +124,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
     self.timeInterval = 5.0;
     self.alignment = kPageControlAlignCenter;
     [self configCollectionView];
-    self.imageContentMode = UIViewContentModeScaleAspectFit;
+    self.imageContentMode = UIViewContentModeScaleToFill;
     
     [[NSNotificationCenter defaultCenter] addObserver:[UIApplication sharedApplication]
                                              selector:NSSelectorFromString(@"hyb_clearCache")

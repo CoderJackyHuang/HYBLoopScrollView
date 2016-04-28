@@ -15,6 +15,7 @@
   [super viewDidLoad];
   
   self.view.backgroundColor = [UIColor whiteColor];
+  self.edgesForExtendedLayout = UIRectEdgeNone;
   
   // 这个图片会找不到，而显示默认图
   NSString *url = @"http://test.meirongzongjian.com/imageServer/user/3/42ccb9c75ccf5e910cd6f5aaf0cd1200.jpg";
@@ -38,7 +39,7 @@
   
   // 请使用weakSelf，不然内存得不到释放
   __weak __typeof(self) weakSelf = self;
-  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 40, 320, 120) imageUrls:images timeInterval:5  didSelect:^(NSInteger atIndex) {
+  HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:CGRectMake(0, 0, 320, 120) imageUrls:images timeInterval:5  didSelect:^(NSInteger atIndex) {
    [weakSelf dismissViewControllerAnimated:YES completion:NULL];
   } didScroll:^(NSInteger toIndex) {
     
@@ -48,7 +49,7 @@
   loop.alignment = kPageControlAlignRight;
   loop.adTitles = titles;
   [loop pauseTimer];
-  
+//  loop.imageContentMode = UIViewContentModeScaleToFill;
   [self.view addSubview:loop];
 }
 

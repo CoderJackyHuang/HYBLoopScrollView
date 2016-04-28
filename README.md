@@ -2,11 +2,29 @@
 
 **开源项目名称**：HYBLoopScrollView  
 **开源项目目标**：一键式集成轮播组件
-**当前版本**：3.1.3
+**当前版本**：3.2.0
 
 App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助！使用过程中有出现任何bug，都会很快帮助解决！
 
 ![image](http://www.henishuo.com/wp-content/uploads/2016/03/screen.gif)
+
+#升级到Version 3.2.0
+
+* 由于有些小伙伴不太会用，导致图片不占满，所以此版本修改图片默认缩放模式为填充满
+* 增加page control小圆点大小可自由调整设置的功能
+* Demo中增加有导航条时，设置的高度没有占满时，需要设置以下：
+
+```
+// 当有导航条时，若距离上面不点满，或者被挡一部分，请一定要设置这一行，因为7.0之后self.view的起点坐标从
+// 状态栏开始的。需要在controller中设置如下属性
+self.edgesForExtendedLayout = UIRectEdgeNone;
+```
+
+修改圆点大小：
+
+```
+loop.pageControl.size = 10;
+```
 
 #升级到Version 3.1.3
 

@@ -71,7 +71,7 @@ typedef NS_ENUM(NSUInteger, HYBFlowLayoutType) {
 /**
  *	@author 黄仪标
  *
- *	用于指定图片内容的模式，默认为UIViewContentModeScaleAspectFit。
+ *	用于指定图片内容的模式，默认为UIViewContentModeScaleToFill。
  *  当shouldAutoClipImageToViewSize设置为YES后，设置内容填充模式没有作用
  */
 @property (nonatomic, assign) UIViewContentMode imageContentMode;

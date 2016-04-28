@@ -322,7 +322,7 @@ static char *s_hyb_cacheFaileTimesKeys = "hyb_cacheFaileTimesKeys";
 }
 
 - (void)configureLayout {
-  self.contentMode = UIViewContentModeScaleAspectFill;
+  self.contentMode = UIViewContentModeScaleToFill;
   self.animated = YES;
   self.hyb_borderColor = [UIColor lightGrayColor];
   self.hyb_borderWidth = 0.0;
