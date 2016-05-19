@@ -2,56 +2,16 @@
 
 **开源项目名称**：HYBLoopScrollView  
 **开源项目目标**：一键式集成轮播组件
-**当前版本**：3.2.0
+**当前版本**：3.2.1
 
 App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助！使用过程中有出现任何bug，都会很快帮助解决！
 
 ![image](http://www.henishuo.com/wp-content/uploads/2016/03/screen.gif)
 
-#升级到Version 3.2.0
 
-* 由于有些小伙伴不太会用，导致图片不占满，所以此版本修改图片默认缩放模式为填充满
-* 增加page control小圆点大小可自由调整设置的功能
-* Demo中增加有导航条时，设置的高度没有占满时，需要设置以下：
+#Version3.2.1
 
-```
-// 当有导航条时，若距离上面不点满，或者被挡一部分，请一定要设置这一行，因为7.0之后self.view的起点坐标从
-// 状态栏开始的。需要在controller中设置如下属性
-self.edgesForExtendedLayout = UIRectEdgeNone;
-```
-
-修改圆点大小：
-
-```
-loop.pageControl.size = 10;
-```
-
-#升级到Version 3.1.3
-
-* 优化内存，采用用完即释放的方式加载缓存图片，可降低内存的使用！
-* 去掉内存缓存，当同一个界面使用很多个轮播控件时，就不会内存暴涨
-
-#升级到Version 3.1.2
-
-* 处理page control 点击后跳转不正常的问题
-
-#升级到Version 3.1.1
-
-* fix timer bug, use core foundation timer add/remove from run loop
-
-#升级到Version 3.1.0
-
-* 支持横屏、竖屏
-* 支持autolayout
-* 支持外部设置图片缩放参数contentMode
-* 分别缓存横屏、竖屏图片大小
-
-#升级到Version 3.0.0
-
-* 去掉AFNetworking依赖
-* 增加自带图片下载及缓存功能
-* 增加图片自动剪裁功能
-* 简化API
+* 更新至IPV6 only支持！
 
 #有什么特性
 
@@ -219,6 +179,37 @@ loop.shouldAutoClipImageToViewSize = NO;
 下载地址：[HYBLoopScrollView](https://github.com/CoderJackyHuang/HYBLoopScrollView)
 
 ###喜欢就给个Star吧！
+
+#版本历史
+
+* 3.2.1
+  - 更新至IPV6 only支持！
+
+* 3.2.0
+  - 由于有些小伙伴不太会用，导致图片不占满，所以此版本修改图片默认缩放模式为填充满
+  - 增加page control小圆点大小可自由调整设置的功能
+  - Demo中增加有导航条时，增加高度没有占满时的设置
+
+* 3.1.3
+  - 优化内存，采用用完即释放的方式加载缓存图片，可降低内存的使用！
+  - 去掉内存缓存，当同一个界面使用很多个轮播控件时，就不会内存暴涨
+
+* 3.1.2
+  - 处理page control 点击后跳转不正常的问题
+
+* 3.1.1
+  - fix timer bug, use core foundation timer add/remove from run loop
+
+* 3.1.0
+  - 支持横屏、竖屏
+  - 支持autolayout
+  - 支持外部设置图片缩放参数contentMode
+  - 分别缓存横屏、竖屏图片大小
+* 3.0.0
+  - 去掉AFNetworking依赖
+  - 增加自带图片下载及缓存功能
+  - 增加图片自动剪裁功能
+  - 简化API
 
 #License
 
