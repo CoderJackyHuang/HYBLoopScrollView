@@ -21,10 +21,10 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
 /**
  *	图片下载器，没有直接使用NSURLSession之类的，是因为希望这套库可以支持iOS6
  */
-@interface HYBImageDownloader : NSObject<NSURLConnectionDataDelegate>
+@interface HYBImageDownloader : NSObject<NSURLSessionDownloadDelegate>
 
-@property (nonatomic, strong) NSURLConnection *connection;
-@property (nonatomic, strong) NSMutableData *data;
+@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSURLSessionDownloadTask *task;
 
 @property (nonatomic, assign) unsigned long long totalLength;
 @property (nonatomic, assign) unsigned long long currentLength;
@@ -59,52 +59,43 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
                                                          cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                      timeoutInterval:60];
   [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+  NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+  NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+  self.session = [NSURLSession sessionWithConfiguration:config
+                                               delegate:self
+                                          delegateQueue:queue];
+  NSURLSessionDownloadTask *task = [self.session downloadTaskWithRequest:request];
+  [task resume];
+  self.task = task;
+}
+
+- (void)URLSession:(NSURLSession *)session
+      downloadTask:(NSURLSessionDownloadTask *)downloadTask
+didFinishDownloadingToURL:(NSURL *)location {
+  NSData *data = [NSData dataWithContentsOfURL:location];
   
-  self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-}
-
-#pragma mark - NSURLConnectionDataDelegate
-- (NSMutableData *)data {
-  if (_data == nil) {
-    _data = [[NSMutableData alloc] init];
-  }
-  
-  return _data;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-  [self.data setLength:0];
-  self.totalLength = response.expectedContentLength;
-  self.currentLength = 0;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-  [self.data appendData:data];
-  self.currentLength += data.length;
-  
-  if (self.progressBlock) {
-    self.progressBlock(self.totalLength, self.currentLength);
-  }
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.progressBlock) {
     self.progressBlock(self.totalLength, self.currentLength);
   }
   
   if (self.callbackOnFinished) {
-    self.callbackOnFinished([self.data copy], nil);
+    self.callbackOnFinished(data, nil);
     
     // 防止重复调用
     self.callbackOnFinished = nil;
   }
-  //  NSLog(@"%s %@   %p", __FUNCTION__, connection.currentRequest.URL.absoluteString, self);
-  
-  [self.data setLength:0];
-  self.data = nil;
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
+  self.currentLength = totalBytesWritten;
+  self.totalLength = totalBytesExpectedToWrite;
+  
+  if (self.progressBlock) {
+    self.progressBlock(self.totalLength, self.currentLength);
+  }
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
   if ([error code] != NSURLErrorCancelled) {
     if (self.callbackOnFinished) {
       self.callbackOnFinished(nil, error);
@@ -112,10 +103,6 @@ typedef void (^HYBDownloadProgressBlock)(unsigned long long total, unsigned long
     
     self.callbackOnFinished = nil;
   }
-  
-  [self.data setLength:0];
-  self.data = nil;
-  //  NSLog(@"%s", __FUNCTION__);
 }
 
 @end
@@ -506,7 +493,7 @@ static char *s_hyb_cacheFaileTimesKeys = "hyb_cacheFaileTimesKeys";
 }
 
 - (void)cancelRequest {
-  [_imageDownloader.connection cancel];
+  [_imageDownloader.task cancel];
 }
 
 + (UIImage *)clipImage:(UIImage *)image toSize:(CGSize)size isScaleToMax:(BOOL)isScaleToMax {
