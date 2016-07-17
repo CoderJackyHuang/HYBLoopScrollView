@@ -6,7 +6,7 @@
 
 App中不可或缺的广告轮播图组件，现在开源出来了，希望对大家有帮助！使用过程中有出现任何bug，都会很快帮助解决！
 
-![image](http://www.henishuo.com/wp-content/uploads/2016/03/screen.gif)
+![image](http://www.huangyibiao.com/wp-content/uploads/2016/03/screen.gif)
 
 
 #Version3.2.1
