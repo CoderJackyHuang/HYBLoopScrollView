@@ -249,6 +249,8 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 
 - (void)autoScroll {
   NSInteger curIndex = (self.collectionView.contentOffset.x + self.layout.itemSize.width * 0.5) / self.layout.itemSize.width;
+  if(curIndex < 0)//当轮播控件被添加到一个还未显示的界面上时self.layout.itemSize.width为0会导致异常
+        return;
   NSInteger toIndex = curIndex + 1;
   
   NSIndexPath *indexPath = nil;
